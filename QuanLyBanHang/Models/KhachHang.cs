@@ -23,12 +23,13 @@ namespace QuanLyBanHang.Models
         public int MaKH { get; set; }
         public string TenKH { get; set; }
         public string DiaChi { get; set; }
+        public string GioiTinh { get; set; }
         public string DienThoai { get; set; }
         public string Fax { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string LoginErrorMessage { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DonHang> DonHangs { get; set; }
     }

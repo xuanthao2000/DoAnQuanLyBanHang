@@ -14,23 +14,13 @@ namespace QuanLyBanHang.Controllers
     {
         qlbanhangEntities db = new qlbanhangEntities();
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            var sanPhams = db.SanPhams.Include(s => s.LoaiSP);
-            return View(sanPhams.ToList());
+            
+                var sanPhams = db.SanPhams.Include(s => s.LoaiSP);
+                return View(sanPhams.ToList());
         }
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SanPham sanPham = db.SanPhams.Find(id);
-            if (sanPham == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sanPham);
-        }
+
+
     }
 }

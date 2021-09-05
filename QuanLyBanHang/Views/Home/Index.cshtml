@@ -36,10 +36,21 @@
             
             <div class="col-lg-3 col-md-6 col-sm-6 col-6 mt-3">
                 <div class="card product p-2">
-                    <a><img id="i@(item.MaSP)" class="proo card-img-top" alt="@item.TenSP" src="/@item.HinhSP"></a>
+                    <a><img id="i@(item.MaSP)" class="proo card-img-top" style="max-height:340px;" alt="@item.TenSP" src="/@item.HinhSP"></a>
                     
                     <div class="card-title product-title text-center h5">@Html.DisplayFor(modelItem => item.TenSP)</div>
-                    <div class="price text-center h5">@Html.DisplayFor(modelItem => item.DonGia) VNĐ</div>
+                    <div class="price text-center h5">
+                        @if (Session["DangGiamGia"] != null)
+                        {
+                            <i>@Html.DisplayFor(modelItem => item.DonGia ) VNĐ </i><Strike>@Html.DisplayFor(modelItem => item.DonGia) VNĐ </Strike>
+
+                        }
+                        else
+                        {
+                            <p>@Html.DisplayFor(modelItem => item.DonGia) VNĐ </p>
+                        }
+
+                    </div>
                         <a class ="text-center add-to-cart add-cart btn btn-outline-warning"href="@Url.Action("Details","Home", new { id = item.MaSP})">
                         Xem chi tiết
                         </a>

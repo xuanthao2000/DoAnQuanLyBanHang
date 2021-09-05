@@ -13,8 +13,9 @@
           <Property Name="MaDH" Type="int" Nullable="false" />
           <Property Name="MaSP" Type="nvarchar" MaxLength="4" Nullable="false" />
           <Property Name="Soluong" Type="int" />
-          <Property Name="DongiaBan" Type="int" />
-          <Property Name="Giamgia" Type="real" />
+          <Property Name="Size" Type="nchar" MaxLength="10" />
+          <Property Name="ThanhTien" Type="int" />
+          <Property Name="Giamgia" Type="int" />
         </EntityType>
         <EntityType Name="DonHang">
           <Key>
@@ -34,6 +35,7 @@
           <Property Name="MaKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenKH" Type="nvarchar" MaxLength="30" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="30" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
           <Property Name="DienThoai" Type="nvarchar" MaxLength="7" />
           <Property Name="Fax" Type="nvarchar" MaxLength="12" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
@@ -57,6 +59,7 @@
           <Property Name="Dienthoai" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Admin" Type="bit" />
         </EntityType>
         <EntityType Name="SanPham">
           <Key>
@@ -67,6 +70,8 @@
           <Property Name="DonGia" Type="int" />
           <Property Name="MaLoaiSP" Type="int" />
           <Property Name="HinhSP" Type="nvarchar(max)" />
+          <Property Name="DangGiamGia" Type="bit" />
+          <Property Name="MaGiamGia" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -182,8 +187,9 @@
           <Property Name="MaDH" Type="Int32" Nullable="false" />
           <Property Name="MaSP" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Soluong" Type="Int32" />
-          <Property Name="DongiaBan" Type="Int32" />
-          <Property Name="Giamgia" Type="Single" />
+          <Property Name="Size" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ThanhTien" Type="Int32" />
+          <Property Name="Giamgia" Type="Int32" />
           <NavigationProperty Name="DonHang" Relationship="Self.FK_CTDH_DonHang" FromRole="CTDH" ToRole="DonHang" />
           <NavigationProperty Name="SanPham" Relationship="Self.FK_CTDH_SanPham" FromRole="CTDH" ToRole="SanPham" />
         </EntityType>
@@ -208,6 +214,7 @@
           <Property Name="MaKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenKH" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DienThoai" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -233,6 +240,7 @@
           <Property Name="Dienthoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Admin" Type="Boolean" />
           <NavigationProperty Name="DonHangs" Relationship="Self.FK_DonHang_Nhanvien" FromRole="Nhanvien" ToRole="DonHang" />
         </EntityType>
         <EntityType Name="SanPham">
@@ -244,6 +252,8 @@
           <Property Name="DonGia" Type="Int32" />
           <Property Name="MaLoaiSP" Type="Int32" />
           <Property Name="HinhSP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DangGiamGia" Type="Boolean" />
+          <Property Name="MaGiamGia" Type="Int32" />
           <NavigationProperty Name="CTDHs" Relationship="Self.FK_CTDH_SanPham" FromRole="SanPham" ToRole="CTDH" />
           <NavigationProperty Name="LoaiSP" Relationship="Self.FK_SanPham_LoaiSP" FromRole="SanPham" ToRole="LoaiSP" />
         </EntityType>
@@ -360,7 +370,8 @@
                 <ScalarProperty Name="MaDH" ColumnName="MaDH" />
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
                 <ScalarProperty Name="Soluong" ColumnName="Soluong" />
-                <ScalarProperty Name="DongiaBan" ColumnName="DongiaBan" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
                 <ScalarProperty Name="Giamgia" ColumnName="Giamgia" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -383,6 +394,7 @@
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
                 <ScalarProperty Name="TenKH" ColumnName="TenKH" />
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
                 <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
                 <ScalarProperty Name="Fax" ColumnName="Fax" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -408,6 +420,7 @@
                 <ScalarProperty Name="Dienthoai" ColumnName="Dienthoai" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -419,6 +432,8 @@
                 <ScalarProperty Name="DonGia" ColumnName="DonGia" />
                 <ScalarProperty Name="MaLoaiSP" ColumnName="MaLoaiSP" />
                 <ScalarProperty Name="HinhSP" ColumnName="HinhSP" />
+                <ScalarProperty Name="DangGiamGia" ColumnName="DangGiamGia" />
+                <ScalarProperty Name="MaGiamGia" ColumnName="MaGiamGia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

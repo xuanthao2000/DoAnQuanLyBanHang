@@ -17,8 +17,9 @@ namespace QuanLyBanHang.Models
         public int MaDH { get; set; }
         public string MaSP { get; set; }
         public Nullable<int> Soluong { get; set; }
-        public Nullable<int> DongiaBan { get; set; }
-        public Nullable<float> Giamgia { get; set; }
+        public string Size { get; set; }
+        public Nullable<int> ThanhTien { get; set; }
+        public Nullable<int> Giamgia { get; set; }
     
         public virtual DonHang DonHang { get; set; }
         public virtual SanPham SanPham { get; set; }

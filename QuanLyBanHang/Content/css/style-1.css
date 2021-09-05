@@ -167,6 +167,7 @@ figure {
  * Correct margin displayed oddly in IE 6/7.
  */
 
+    
 form {
     margin: 0;
 }
@@ -614,4 +615,19 @@ font-weight: 700;
 }
 .giaohang-content{
     margin-left: 0.7rem;
+}
+.notifys {
+    display:inline-block;
+  position: absolute;
+  top: 8px;
+  display: inline-block;
+  padding: .25em .6em;
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+  font-weight: 300;
+  border-radius: 3rem;
+  color: #fff;
+  background-color: #fa3434; 
+
 }

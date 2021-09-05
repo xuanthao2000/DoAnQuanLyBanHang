@@ -45,22 +45,23 @@
                         <i class="fas fa-bars"></i>
                     </span>
                 </button>
+
                 <div id="my-nav" class="collapse navbar-collapse">
                     <ul class="navbar-nav mr-auto header-menu">
                         <li class="nav-item active">
                             <a class="nav-link" href="@Url.Action("Index","Home",new {})">TRANG CHỦ <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("AoThun","Clothes", new {})" tabindex="-1" aria-disabled="false">ÁO THUN</a>
+                            <a class="nav-link" href="@Url.Action("Index","TShirt", new {})" tabindex="-1" aria-disabled="false">ÁO THUN</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("TuiSach","Clothes", new {})" tabindex="-1" aria-disabled="true">TÚI SÁCH</a>
+                            <a class="nav-link" href="@Url.Action("Index","Bag", new {})" tabindex="-1" aria-disabled="true">PHỤ KIỆN</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("SoMi","Clothes", new {})" tabindex="-1" aria-disabled="true">SƠ MI</a>
+                            <a class="nav-link" href="@Url.Action("Index","Shirt", new {})" tabindex="-1" aria-disabled="true">SƠ MI</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Hoodie","Clothes", new {})" tabindex="-1" aria-disabled="true">HOODIE</a>
+                            <a class="nav-link" href="@Url.Action("Index","Hoodie", new {})" tabindex="-1" aria-disabled="true">HOODIE</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index","Contact",new {})" tabindex="-1" aria-disabled="true">LIÊN HỆ</a>
@@ -68,7 +69,6 @@
 
 
                     </ul>
-
                     <div class="mr-3 cart">
                         <a href="@Url.Action("Index","Login",new {})" onclick="checkLogin()">
                             <i class="fas fa-user"></i>
@@ -77,18 +77,51 @@
 
                         <a class="ml-3 mr-3" href="@Url.Action("Index","GioHang",new {})">
                             <i class="fas fa-shopping-cart"></i>
+                            <span class="notifys">
+                                @if (Session["count"] != null)
+                                {
+                                    @Session["count"]
+                                }
+                                else
+                                {
+                                    Session["count"] = 0;
+                                    @Session["count"];
+                                }
+                            </span>
                         </a>
 
                     </div>
-                    <div class="form-inline search" style="margin-right:30px;">
-                        <input type="text" class="form-control" placeholder="Search..">
-                        <button type="submit" class="form-control btn">
+                   
+                    <div class="form-inline search" style="margin-right:20px;">
+                        @*<input type="text" class="form-control" placeholder="Search..">
+                        <button type="submit" class="form-control btn" style="">
 
-                        </button>
+                        </button>*@
+                        @using (Html.BeginForm("Index", "Home"))
+                        { 
+                        @Html.TextBox("search") <input type="submit" value="Search"/>
+                        }
                     </div>
+                    @if(Session["MaKH"] != null ) {
+                        if(Session["GioiTinh"] != null)
+                        { 
+                        <div class="logo" style="width:40px;margin-right:0px">
+                            <a href="@Url.Action("Index","Login")"><img src="~/Content/img/avtnam.png" /></a>
+                        </div>
+                        }
+                        else
+                        {
+                            <div class="logo" style="width:40px;margin-right:0px">
+                                <a href="@Url.Action("Index","Login")"><img src="~/Content/img/avtnu.png" /></a>
+                            </div>
+                        }
+                    }else
+                    { }
 
                 </div>
+
             </nav>
+
         </div>
 
     </div>

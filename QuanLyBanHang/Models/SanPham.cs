@@ -25,6 +25,8 @@ namespace QuanLyBanHang.Models
         public Nullable<int> DonGia { get; set; }
         public Nullable<int> MaLoaiSP { get; set; }
         public string HinhSP { get; set; }
+        public Nullable<bool> DangGiamGia { get; set; }
+        public Nullable<int> MaGiamGia { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTDH> CTDHs { get; set; }
