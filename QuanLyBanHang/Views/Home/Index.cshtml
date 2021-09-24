@@ -40,16 +40,7 @@
                     
                     <div class="card-title product-title text-center h5">@Html.DisplayFor(modelItem => item.TenSP)</div>
                     <div class="price text-center h5">
-                        @if (Session["DangGiamGia"] != null)
-                        {
-                            <i>@Html.DisplayFor(modelItem => item.DonGia ) VNĐ </i><Strike>@Html.DisplayFor(modelItem => item.DonGia) VNĐ </Strike>
-
-                        }
-                        else
-                        {
                             <p>@Html.DisplayFor(modelItem => item.DonGia) VNĐ </p>
-                        }
-
                     </div>
                         <a class ="text-center add-to-cart add-cart btn btn-outline-warning"href="@Url.Action("Details","Home", new { id = item.MaSP})">
                         Xem chi tiết

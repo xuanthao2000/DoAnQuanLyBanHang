@@ -1,0 +1,65 @@
+﻿@model IEnumerable<QuanLyBanHang.Models.DonHang>
+
+@{
+    ViewBag.Title = "myOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin-top:100px;margin-left:140px;width:80%;">
+    <h1>DANH SÁCH CÁC ĐƠN HÀNG CỦA TÔI</h1>
+    <table class="table" style="margin-top:30px;text-align:center;   ">
+        <tr>
+            <th>
+               Mã đơn hàng
+            </th>
+            <th>
+                Ngày lập đơn hàng
+            </th>
+            <th>
+                Ngày giao hàng
+            </th>
+            <th>
+                Địa chỉ giao hàng
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaDH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayLapHD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayGiaoHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChiGiaoHang)
+                </td>
+                <td>
+                    @if (item.NgayGiaoHang != null)
+                    {
+                        <p style="color:#17850D">Đã duyệt</p>
+                    }
+                    else
+                    {
+                        <p style="color:red;">Chờ phê duyệt</p>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.MaDH })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+

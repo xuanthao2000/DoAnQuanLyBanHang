@@ -1,0 +1,70 @@
+﻿<@model IEnumerable<QuanLyBanHang.Models.CTDH>
+@using QuanLyBanHang.Models
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2 style="margin-top:100px;margin-left:140px;">CHI TIẾT ĐƠN HÀNG</h2>
+
+
+<table class="table" style="text-align:center; width:80%;align-content:center;margin-top:20px;margin-left:140px;">
+    <tr>
+        <th>
+            Mã đơn hàng
+        </th>
+        
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Hình sản phẩm
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Giá tiền
+        </th>
+        <th>
+            Giảm giá
+        </th>
+        <th>
+            Địa chỉ giao hàng
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaDH)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.SanPham.TenSP)
+        </td>
+        <td>
+            @Html.Image("../../" + @item.SanPham.HinhSP, @item.SanPham.HinhSP, "70")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Soluong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThanhTien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Giamgia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DonHang.DiaChiGiaoHang)
+        </td>
+        
+    </tr>
+}
+
+</table>

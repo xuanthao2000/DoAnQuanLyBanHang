@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using QuanLyBanHang.Models;
+using System.Net;
 
 namespace QuanLyBanHang.Controllers
 {
@@ -98,7 +99,79 @@ namespace QuanLyBanHang.Controllers
         public ActionResult Logout()
         {
             Session.Clear();//remove session
-            return RedirectToAction("Index","Login");
+            return RedirectToAction("Index", "Login");
+        }
+        public ActionResult Edit(int? id)
+        {
+            id = (int)Session["MaKH"];
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //KhachHang a = db.KhachHangs.Find(id);
+            //var pw = a.Password;
+            //Session["pwCu"] = pw;
+            KhachHang khachHang = db.KhachHangs.Find(id);
+            if (khachHang == null)
+            {
+                return HttpNotFound();
+            }
+            return View(khachHang);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "MaKH,Email,TenKH,DiaChi,GioiTinh,DienThoai,Password")] KhachHang khachHang,FormCollection frm)
+        {
+
+
+            string cfPw = frm["confirmPw"].ToString();
+            //string oldPw = frm["oldPw"].ToString();
+           
+            if (ModelState.IsValid)
+            {
+                //if (oldPw != (string)Session["pw"])
+                //{
+                    if (khachHang.Password == cfPw)
+                    {
+                    db.Entry(khachHang).State = EntityState.Modified;
+                    db.SaveChanges();
+                    }else
+                    {
+                        khachHang.LoginErrorMessage = "Xác nhận mật khẩu sai";
+                    }
+                //}
+                //else
+                //{
+                //    khachHang.LoginErrorMessage = "Mật khẩu cũ sai";
+                //}
+                return RedirectToAction("Edit","Login");
+            }
+            return View(khachHang);
+            
+        }
+        public ActionResult myOrders()
+        {
+            //DonHang donHang = db.DonHangs.Find(id);
+            var a = (int)Session["MaKH"];
+            //var ct = db.DonHangs.Where(m => m.MaKH == (int)Session["MaKH"]).ToList();
+            var 
+            donHangs = db.DonHangs.Where(m => m.MaKH == a);
+            return View(donHangs.ToList());
+        }
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var cTDH = db.CTDHs.Where(m => m.MaDH == id);
+            if (cTDH == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cTDH.ToList());
         }
     }
 }

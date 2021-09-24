@@ -17,7 +17,6 @@ namespace QuanLyBanHang.Models
         public int MaDH { get; set; }
         public string MaSP { get; set; }
         public Nullable<int> Soluong { get; set; }
-        public string Size { get; set; }
         public Nullable<int> ThanhTien { get; set; }
         public Nullable<int> Giamgia { get; set; }
     

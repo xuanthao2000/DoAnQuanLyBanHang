@@ -205,14 +205,25 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CTDHsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DonHangsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\KhachHangsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoaiSPsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhanviensController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SanPhamsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BagController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DatHangController.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HoodieController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ShirtController.cs" />
+    <Compile Include="Controllers\TrousersController.cs" />
     <Compile Include="Controllers\TShirtController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -341,6 +352,41 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSPs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSPs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSPs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSPs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiSPs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPhams\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhanviens\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhanviens\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhanviens\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhanviens\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhanviens\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\UnapprovedOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\ApprovedOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\CTDHs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CTDHs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\CTDHs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\CTDHs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CTDHs\Index.cshtml" />
     <EntityDeploy Include="Models\QLBanHangEF.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QLBanHangEF.Designer.cs</LastGenOutput>
@@ -391,16 +437,34 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\SignUp.cshtml" />
+    <Content Include="Views\GioHang\Index.cshtml" />
+    <Content Include="Views\DatHang\Index.cshtml" />
     <Content Include="Views\TShirt\Index.cshtml" />
+    <Content Include="Views\TShirt\SortDescending.cshtml" />
     <Content Include="Views\Shirt\Index.cshtml" />
+    <Content Include="Views\Shirt\SortDescending.cshtml" />
+    <Content Include="Views\Shirt\SortAscending.cshtml" />
     <Content Include="Views\Hoodie\Index.cshtml" />
+    <Content Include="Views\Hoodie\SortDescending.cshtml" />
+    <Content Include="Views\Hoodie\SortAscending.cshtml" />
     <Content Include="Views\Bag\Index.cshtml" />
+    <Content Include="Views\Bag\SortDescending.cshtml" />
+    <Content Include="Views\Bag\SortAscending.cshtml" />
+    <Content Include="Views\TShirt\SortAscending.cshtml" />
+    <Content Include="Views\Trousers\Index.cshtml" />
+    <Content Include="Views\Trousers\SortDescending.cshtml" />
+    <Content Include="Views\Trousers\SortAscending.cshtml" />
+    <Content Include="Views\Login\Edit.cshtml" />
+    <Content Include="Views\Login\myOrders.cshtml" />
+    <Content Include="Views\Login\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

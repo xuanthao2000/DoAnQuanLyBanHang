@@ -1,5 +1,6 @@
 ﻿@model QuanLyBanHang.Models.KhachHang
 
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +8,8 @@
 
 
 
-
+@if (Session["MaKH"] == null)
+{
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,6 +74,12 @@
     <!-- --- -->
 </body>
 </html>
+}
+else
+{
+   
+
+}
 
 
 

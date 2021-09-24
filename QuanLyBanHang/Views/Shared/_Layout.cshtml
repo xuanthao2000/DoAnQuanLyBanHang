@@ -64,16 +64,28 @@
                             <a class="nav-link" href="@Url.Action("Index","Hoodie", new {})" tabindex="-1" aria-disabled="true">HOODIE</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","Trousers", new {})" tabindex="-1" aria-disabled="true">QUẦN</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index","Contact",new {})" tabindex="-1" aria-disabled="true">LIÊN HỆ</a>
                         </li>
 
 
                     </ul>
+                   
                     <div class="mr-3 cart">
-                        <a href="@Url.Action("Index","Login",new {})" onclick="checkLogin()">
-                            <i class="fas fa-user"></i>
-                        </a>
-
+                         @if (Session["MaKH"] == null)
+                         {
+                            <a href="@Url.Action("Index", "Login", new { })" onclick="checkLogin()">
+                                <i class="fas fa-user"></i>
+                            </a>
+                         }
+                         else
+                         {
+                            <a href="@Url.Action("myOrders", "Login", new { })" onclick="checkLogin()">
+                                <i class="fas fa-user"></i>
+                            </a>
+                         }
 
                         <a class="ml-3 mr-3" href="@Url.Action("Index","GioHang",new {})">
                             <i class="fas fa-shopping-cart"></i>
@@ -106,13 +118,13 @@
                         if(Session["GioiTinh"] != null)
                         { 
                         <div class="logo" style="width:40px;margin-right:0px">
-                            <a href="@Url.Action("Index","Login")"><img src="~/Content/img/avtnam.png" /></a>
+                            <a href="@Url.Action("Edit","Login")"><img src="~/Content/img/avtnam.png" /></a>
                         </div>
                         }
                         else
                         {
                             <div class="logo" style="width:40px;margin-right:0px">
-                                <a href="@Url.Action("Index","Login")"><img src="~/Content/img/avtnu.png" /></a>
+                                <a href="@Url.Action("Edit","Login")"><img src="~/Content/img/avtnu.png" /></a>
                             </div>
                         }
                     }else
@@ -245,12 +257,14 @@
                             vị khách đến trên toàn quốc.
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3 link-support">
                         <div class="h6">FANPAGE CHÚNG TÔI</div>
-                        <div class="fb-page" data-href="https://www.facebook.com/motplus/" data-tabs="timeline"
-                             data-width="360" data-height="140" data-small-header="false"
-                             data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-
+                        <div class="text">
+                            Với hơn 20 cửa hàng trải dài cả nước, Germe hy vọng sẽ mang đến sự phục vụ chu
+                            đáo cho tất
+                            cả các khách hàng. Hệ thống cửa hàng thời trang Germe luôn luôn lắng nghe những ý kiến đóng
+                            góp từ các khách hàng với mục tiêu đẩy mạnh dịch vụ, mở rộng hệ thống và làm hài lòng những
+                            vị khách đến trên toàn quốc.
                         </div>
                     </div>
                 </div>
