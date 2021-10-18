@@ -1,0 +1,75 @@
+﻿@model QuanLyBanHang.Models.SanPham
+@using QuanLyBanHang.Models
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chỉnh sửa</h2>
+
+@using (Html.BeginForm("Edit", "SanPhams", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Sản phẩm</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaSP)
+
+        <div class="form-group">
+            <label style="margin-left:10px;"> Tên sản phẩm</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenSP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label style="margin-left:10px;"> Đơn giá</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DonGia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DonGia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label style="margin-left:10px;"> Số lượng</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label style="margin-left:10px;"> Mã loại sản phẩm</label>
+            <div class="col-md-10">
+                @Html.DropDownList("MaLoaiSP", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaLoaiSP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label style="margin-left:10px;"> Hình sản phẩm</label>
+            <div class="col-md-10">
+                <a><img id="i@(Model.MaSP)" class="proo card-img-top" style="max-height:200px;max-width:100px;" alt="@Model.TenSP" src="/@Model.HinhSP"></a>
+                @Html.TextBox("HinhUpload","",new {type="file" })
+                @Html.Hidden("HinhSP")
+                @*@Html.EditorFor(model => model.HinhSP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HinhSP, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Sửa" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Trở về danh sách sản phẩm", "Index")
+</div>

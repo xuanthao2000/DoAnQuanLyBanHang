@@ -1,0 +1,78 @@
+﻿@model IEnumerable<QuanLyBanHang.Models.Nhanvien>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@if (Session["Admin"] != null)
+{
+    if ((bool)Session["Admin"] == true)
+    { 
+<h2>Quản lý nhân viên</h2>
+
+<p>
+    @Html.ActionLink("Thêm nhân viên mới", "Create")
+</p>
+<table class="table" style="margin-top:20px;">
+    <tr>
+        <th>
+            Tên nhân viên
+        </th>
+        <th>
+           Địa chỉ
+        </th>
+        <th>
+            Điện thoại
+        </th>
+        <th>
+            Email
+        </th>
+        @if (Convert.ToBoolean(Session["Admin"]) == true)
+        {
+            <th>
+                Mật khẩu
+            </th>
+        }
+        else { }
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoNV) @Html.DisplayFor(modelItem => item.Ten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Diachi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dienthoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id=item.MaNV }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id=item.MaNV }) |
+            @Html.ActionLink("Xóa", "Delete", new { id=item.MaNV })
+        </td>
+    </tr>
+}
+
+</table>
+    }
+    else
+    {
+        <h4>Bạn không có quyền quản lý nhân viên</h4>
+    }
+}
+else
+{
+    <h4>Bạn không thể quản lý nhân viên. Bạn phải đăng nhập <a class="nav-link" href="~/Login/Index"> Đăng nhập</a></h4>
+}

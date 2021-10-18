@@ -1,0 +1,57 @@
+﻿@model IEnumerable<QuanLyBanHang.Models.SanPham>
+@using QuanLyBanHang.Models
+@using System.Linq
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Store</title>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="~/Content/css/style-1.css" rel="stylesheet" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+</head>
+
+<body>
+    <div class="carousel-inner" style="margin-top:50px">
+        <div class="carousel-item active">
+            <img src="~/Content/img/banner-2.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:20px;margin:0,0,50px,50px;">
+        @foreach (var item in Model)
+        {
+            
+            <div class="col-lg-3 col-md-6 col-sm-6 col-6 mt-3">
+                <div class="card product p-2">
+                    <a><img id="i@(item.MaSP)" class="proo card-img-top" style="max-height:340px;" alt="@item.TenSP" src="/@item.HinhSP"></a>
+                    
+                    <div class="card-title product-title text-center h5">@Html.DisplayFor(modelItem => item.TenSP)</div>
+                    <div class="price text-center h5">
+                            <p>@Html.DisplayFor(modelItem => item.DonGia) VNĐ </p>
+                    </div>
+                        <a class ="text-center add-to-cart add-cart btn btn-outline-warning"href="@Url.Action("Details","Home", new { id = item.MaSP})">
+                        Xem chi tiết
+                        </a>
+                </div>
+            </div>
+        }
+        </div>
+
+        
+    </body>
+
+    </html>
+        

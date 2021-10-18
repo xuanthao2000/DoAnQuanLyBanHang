@@ -1,0 +1,72 @@
+﻿@model IEnumerable<QuanLyBanHang.Models.SanPham>
+@using QuanLyBanHang.Models
+@using System.Linq
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Store</title>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="~/Content/css/style-1.css" rel="stylesheet" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
+</head>
+
+<body>
+    <div class="carousel-inner" style="margin-top:50px">
+        <div class="carousel-item active">
+            <img src="~/Content/img/banner-2.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+
+            </div>
+        </div>
+    </div>
+    <h1 style="font-size:30px;margin-left:13px;margin-top:20px;">QUẦN</h1>
+    <div style="margin-top:20px;margin-left:13px;">
+        <a href=@Url.Action("SortAscending", "Trousers") class="btn btn-light" style="border-color:black">
+            <span class="text" h> Sắp xếp giá tăng dần</span>
+            <i class="fas fa-arrow-up"></i>
+        </a>
+        <a href=@Url.Action("SortDescending", "Trousers") class="btn btn-light" style="border-color:black">
+            <span class="text" h> Sắp xếp giá giảm dần</span>
+            <i class="fas fa-arrow-down"></i>
+        </a>
+    </div>
+    <div class="row" style="margin-top:0px;margin:0,0,50px,50px;">
+        @foreach (var item in Model)
+        {
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-6 mt-3">
+                <div class="card product p-2">
+                    <a><img class="proo card-img-top" alt="@item.TenSP" style="max-height:340px;" src="/@item.HinhSP"></a>
+
+                    <div class="card-title product-title text-center h5">@Html.DisplayFor(modelItem => item.TenSP)</div>
+                    <div class="price text-center h5">@Html.DisplayFor(modelItem => item.DonGia) VNĐ</div>
+                    <a class="text-center add-to-cart add-cart btn btn-outline-warning" href="@Url.Action("Details","Home", new { id = item.MaSP})">
+                        Xem chi tiết
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+﻿@model QuanLyBanHang.Models.CTDH
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết đơn hàng</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên sản phẩm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SanPham.TenSP)
+        </dd>
+        <dt>
+            Số lượng:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Soluong)
+        </dd>
+
+        <dt>
+            Thành tiền:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThanhTien)
+        </dd>
+
+
+        <dt>
+            Địa chỉ giao hàng:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonHang.DiaChiGiaoHang)
+        </dd>
+
+        
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Trở về danh sách chi tiết đơn hàng", "Index")
+</p>

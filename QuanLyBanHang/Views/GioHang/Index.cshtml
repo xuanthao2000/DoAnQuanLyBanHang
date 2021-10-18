@@ -1,0 +1,243 @@
+﻿@model List<QuanLyBanHang.Models.CartItem>
+@using QuanLyBanHang.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="max-age=604800" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+
+
+
+
+    <!-- Font awesome 5 -->
+    <link href="fonts/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
+
+    <!-- custom style -->
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/responsive.css" rel="stylesheet" />
+    <link href="~/Content/css/ui.css" rel="stylesheet" />
+
+</head>
+<body>
+    @if (Model != null)
+    {
+        
+        <section class="section-content padding-y" style="margin-top:40px;">
+            <div class="container">
+
+                <div class="row">
+                    <main class="col-md-9">
+                        <div class="card">
+
+                            <table class="table table-borderless table-shopping-cart">
+                                <thead class="text-muted">
+                                    <tr class='text-center'>
+                                        <th>
+                                            IMG
+                                        </th>
+                                        <th>
+                                            Tên
+                                        </th>
+                                        <th>
+                                            Đơn giá
+                                        </th>
+                                        <th>
+                                            Số lượng
+                                        </th>
+                                        <th>
+                                            Tổng
+                                        </th>
+                                        <th>
+                                            Xóa
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+                                            <td class="text-center">@Html.Image("../../" + @item.HinhSP, @item.HinhSP, "100")</td>
+                                            <td><a target="_blank" href="@Url.Action("Details", "Home", new { id = item.MaSP })">@item.TenSP</a></td>
+                                            <td>@item.DonGia.ToString() VNĐ</td>
+                                            <td>
+                                                <form action="@Url.Action("Update")" method="get">
+                                                    <input type="hidden" name="MaSP" value="@item.MaSP" />
+                                                    <input style="width:78px;height:30px;" type="number" min="1" name="txtSoLuong" value="@item.SoLuong" />
+                                                    <button style="margin-top:3px;" type="submit" class="btn btn-success btn-sm">Cập nhật</button>
+                                                </form>
+                                            </td>
+
+                                            <td>@item.ThanhTien.ToString() VNĐ</td>
+                                            <td>
+                                                <a href="@Url.Action("DelCartItem", new { MaSP = @item.MaSP })" onclick="return confirm('Xóa sản phẩm này?');" class="btn btn-danger btn-sm">X</a>
+                                                
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            <div class="card-body border-top">
+                                <a href=@Url.Action("Index", "DatHang") class="btn btn-primary float-md-right"> <i class="fas fa-shopping-cart"></i> Mua hàng <i class="fa fa-chevron-right"></i> </a>
+                                <a href=@Url.Action("Index", "Home") class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
+                            </div>
+                        </div> <!-- card.// -->
+
+                        <div class="alert alert-success mt-3">
+                            <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
+                        </div>
+
+                    </main> <!-- col.// -->
+                    <aside class="col-md-3">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Have coupon?</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="" placeholder="Coupon code">
+                                            <span class="input-group-append">
+                                                <button class="btn btn-primary">Apply</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div> <!-- card-body.// -->
+                        </div>  <!-- card .// -->
+                        <div class="card">
+                            <div class="card-body">
+                                <dl class="dlist-align">
+                                    <dt>Tạm tính:</dt>
+                                    <dd class="text-right">@Model.Sum(m => m.ThanhTien) VNĐ</dd>
+                                </dl>
+                                <dl class="dlist-align">
+                                    <dt>Giảm giá:</dt>
+                                    <dd class="text-right">USD 0</dd>
+                                </dl>
+                                <dl class="dlist-align">
+                                    <dt>Tổng tiền:</dt>
+                                    <dd class="text-right  h5"><strong>@Model.Sum(m => m.ThanhTien) VNĐ</strong></dd>
+                                </dl>
+                                <hr>
+
+                            </div> <!-- card-body.// -->
+                        </div>  <!-- card .// -->
+                    </aside> <!-- col.// -->
+                </div>
+
+            </div> <!-- container .//  -->
+        </section>
+
+    }
+    else
+    {
+<section class="section-content padding-y" style="margin-top:40px;">
+    <div class="container">
+
+        <div class="row">
+            <main class="col-md-9">
+                <div class="card">
+
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            <tr class='text-center'>
+                                <th>
+                                    IMG
+                                </th>
+                                <th>
+                                    Tên
+                                </th>
+                                <th>
+                                    Đơn giá
+                                </th>
+                                <th>
+                                    Số lượng
+                                </th>
+                                <th>
+                                    Tổng
+                                </th>
+                                <th>
+                                    Xóa
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+
+                    <div class="card-body border-top">
+                        <a href=@Url.Action("Index", "Home") class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
+                    </div>
+                </div> <!-- card.// -->
+
+                <div class="alert alert-success mt-3">
+                    <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
+                </div>
+
+            </main> <!-- col.// -->
+            <aside class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Have coupon?</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="" placeholder="Coupon code">
+                                    <span class="input-group-append">
+                                        <button class="btn btn-primary">Apply</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div> <!-- card-body.// -->
+                </div>  <!-- card .// -->
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>Tạm tính:</dt>
+                            <dd class="text-right">0 VNĐ</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Giảm giá:</dt>
+                            <dd class="text-right"> 0 VNĐ</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Tổng tiền:</dt>
+                            <dd class="text-right  h5"><strong>0 VNĐ</strong></dd>
+                        </dl>
+                        <hr>
+
+                    </div> <!-- card-body.// -->
+                </div>  <!-- card .// -->
+            </aside> <!-- col.// -->
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+    }
+
+    </body>
+    </html>

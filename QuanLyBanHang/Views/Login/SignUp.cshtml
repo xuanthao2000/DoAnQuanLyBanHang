@@ -1,0 +1,121 @@
+﻿@model QuanLyBanHang.Models.KhachHang
+
+
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="~/Content/css/style-1.css" rel="stylesheet" />
+    <link href="~/Content/css/style-user.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="container sign-up">
+            <div class="form-row text-center">
+                <div class="col-6 sign">
+                    <a class="btn " href="@Url.Action("Index","Login",new {})">ĐĂNG NHẬP</a>
+                </div>
+                <div class="col-6  sign">
+                    <a class="btn">ĐĂNG KÍ</a>
+                </div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <hr />
+
+
+                        <div class="form-group" style="width:700px;">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tên khách hàng" } })
+                                @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group" style="width:700px;">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @class = "form-control", @placeholder = "Giới tính" } })
+                                @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control", @placeholder = "Địa chỉ" } })
+                                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DienThoai, new { htmlAttributes = new { @class = "form-control", @placeholder = "Số điện thoại" } })
+                                @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email (Tên đăng nhập)" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                <p style="margin-top:5px;color:red;">@ViewBag.Message </p> 
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-group" style="margin-left:195px;width:100px;">
+                                <input type="submit" name="submit" style="width:200px;" class="btn btn-primary" value="Create" />
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+
+    </div>
+
+    @*<div class="container-fluid">
+            <div class="container sign-up">
+                <form action="">
+                    <div class="form-row text-center">
+                        <div class="col-6 sign">
+                            <a class="btn " href="@Url.Action("Index","SignIn",new {})">ĐĂNG NHẬP</a>
+                        </div>
+                        <div class="col-6  sign">
+                            <a class="btn">ĐĂNG KÍ</a>
+                        </div>
+                        <div class="mt-4 form-group col-12">
+                            <input class="email" type="text" id="hotend" placeholder="Họ tên">
+                            <input class="email mt-3" type="number" id="Fax" placeholder="Fax">
+                            <input class="email mt-3" type="text" id="" placeholder="Địa chỉ">
+                            <input class="email mt-3" type="number" id="sdtd" placeholder="Số điện thoại">
+                            <input class="email mt-3" type="email" id="emaild" placeholder="Email">
+                            <input class="email mt-3" type="password" id="passwordd" placeholder="Mật Khẩu">
+                            <span class="require-login text-danger">* Các thông tin không được để trống</span>
+
+                            <a href="#" class="btn btn-dark mt-3" onclick="checkSignin()">ĐĂNG KÍ</a>
+
+
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>*@
+</body>
+</html>
+
+
+
