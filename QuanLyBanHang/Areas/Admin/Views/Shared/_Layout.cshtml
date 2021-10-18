@@ -61,6 +61,10 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Quản lí sản phẩm
                         </a>
+                        <a class="nav-link" href="@Url.Action("Index","LoaiSPs",new {})">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            QL loại sản phẩm
+                        </a>
                         @if (Convert.ToBoolean(Session["Admin"]) == true)
                         {
                             <a class="nav-link" href="@Url.Action("Index","NhanViens",new {})">
@@ -132,11 +136,11 @@
                             </nav>
                         </div>
 
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="~/Login/Logout">
+                        <div class="sb-sidenav-menu-heading"></div>
+                        @*<a class="nav-link" href="~/Login/Logout">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Tables
-                        </a>
+                        </a>*@
                     </div>
 
                 </div>
@@ -147,9 +151,22 @@
                     {
                         <p>Admin</p>
                     }
+                    else if (Convert.ToBoolean(Session["Admin"]) == false)
+                    {
+                        <p>Employee</p> 
+                    }
                     else
-                    {<p>Employee</p> }
+                    {
+                        <p></p> 
+                    }
+                    <div>
+                        <a class="nav-link" href="@Url.Action("EditInfo","NhanViens",new { id = @Convert.ToInt32(Session["MaNV"]) })">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i> Thông tin cá nhân</div>
+
+                        </a>
+                    </div>
                 </div>
+                
                 <a class="nav-link" href="~/Login/Logout">
                     <div class="fas fa-sign-out-alt"><i class="fas fa-table"></i></div>
                     Logout

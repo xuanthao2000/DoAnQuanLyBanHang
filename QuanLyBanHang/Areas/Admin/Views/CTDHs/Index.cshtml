@@ -19,19 +19,16 @@
             Mã sản phẩm
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Soluong)
+            Số lượng
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ThanhTien)
+            Thành tiền
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Giamgia)
+            Địa chỉ giao hàng
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DonHang.DiaChiGiaoHang)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SanPham.TenSP)
+            Tên sản phẩm
         </th>
         <th></th>
     </tr>
@@ -51,16 +48,13 @@
             @Html.DisplayFor(modelItem => item.ThanhTien)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Giamgia)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.DonHang.DiaChiGiaoHang)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SanPham.TenSP)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id = item.MaDH })
+            @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaDH })
         </td>
     </tr>
 }

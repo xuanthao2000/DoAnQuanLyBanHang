@@ -4,12 +4,12 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
+<br />
 <h2>Đơn hàng</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Thêm đơn hàng mới", "Create")
-</p>
+</p>*@
 <div style="margin-top:20px;margin-left:13px;">
     <a href="" class="btn btn-light" style="border-color:black">
         <span class="text" h> Tất cả đơn hàng</span>
@@ -27,19 +27,23 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MaDH)
+                Mã DH
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayLapHD)
+                Ngày lập đơn
+            </th>
+            @*<th>
+                Ngày giao hàng
+            </th>*@
+            <th>
+                Tên KH
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayGiaoHang)
+                Địa chỉ giao
             </th>
+            
             <th>
-                @Html.DisplayNameFor(model => model.DiaChiGiaoHang)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KhachHang.TenKH)
+                Thành tiền
             </th>
             <th>
                Trạng thái
@@ -56,14 +60,18 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.NgayLapHD)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.NgayGiaoHang)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DiaChiGiaoHang)
                 </td>
+                
                 <td>
-                    @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
+                    @Html.DisplayFor(modelItem => item.ThanhTien)
                 </td>
                 <td>
                     @if(item.NgayGiaoHang != null)
@@ -75,7 +83,6 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MaDH }) |
                     @Html.ActionLink("Details", "Details", new { id = item.MaDH }) |
                     @if (item.NgayGiaoHang == null)
                     {

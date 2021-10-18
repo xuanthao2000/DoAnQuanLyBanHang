@@ -43,17 +43,14 @@ namespace QuanLyBanHang.Controllers
             
             return View(sanPham);
         }
-        //[HttpPost]
-        //public ActionResult checkSize(FormCollection frm)
-        //{
-        //    string s = frm["Size"].ToString();
-        //    Session["size"] = s;
-        //    return RedirectToAction("AddToCart", "GioHang");
-        //}
+
         [HttpPost]
         public RedirectToRouteResult AddToCart(FormCollection frm)
         {
             string MaSP = frm["MaSP"].ToString();
+            SanPham sanpham = db.SanPhams.Find(MaSP);
+            if(sanpham.SoLuong > 0 )
+            { 
             if (Session["giohang"] == null)
             {
                 Session["giohang"] = new List<CartItem>();
@@ -66,7 +63,7 @@ namespace QuanLyBanHang.Controllers
             //Kiểm tra sản phẩm này có trong giỏ hàng chưa
             if (giohang.FirstOrDefault(m => m.MaSP == MaSP) == null)
             {
-                SanPham sanpham = db.SanPhams.Find(MaSP);
+                
                 CartItem newItem = new CartItem();
                 newItem.MaSP = MaSP;
                 newItem.HinhSP = sanpham.HinhSP;
@@ -96,7 +93,9 @@ namespace QuanLyBanHang.Controllers
                     cartItem.SoLuong = (int)sp.SoLuong;
                 }
             }
+
             Session["giohang"] = giohang;
+            }
             return RedirectToAction("Index", "giohang");
         }
         

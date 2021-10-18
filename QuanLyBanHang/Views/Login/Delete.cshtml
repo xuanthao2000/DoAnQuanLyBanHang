@@ -2,13 +2,11 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <h3>Bạn có chắc chắn muốn hủy đơn hàng này?</h3>
-<div>
-    <h4>DonHang</h4>
+<div style="margin-left:210px;margin-top:50px;">
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -60,12 +58,15 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Trở về danh sách đơn hàng", "myOrders")
         </div>
     }
 </div>
+
+

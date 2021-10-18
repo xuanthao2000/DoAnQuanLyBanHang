@@ -1,15 +1,26 @@
 ﻿<@model IEnumerable<QuanLyBanHang.Models.CTDH>
 @using QuanLyBanHang.Models
-
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-
-<h2 style="margin-top:100px;margin-left:140px;">CHI TIẾT ĐƠN HÀNG</h2>
-
+    <div style="margin-top:100px;margin-left:140px;line-height:1.5;">
+        <h2 >THÔNG TIN ĐƠN HÀNG</h2>
+        <p>Tên: @Convert.ToString(Session["TenKH"]) </p>
+        <p>Địa chỉ: @Convert.ToString(Session["DiaChi"])  </p>
+        @*@if (@Convert.ToInt32(Session["DiaChi"] != true)
+    {
+        <p>Trạng thái giao hàng: Đã giao ngày @item.DonHang.NgayGiaoHang</p>
+    }
+    else
+    {
+        <p>Trạng thái giao hàng: Đang chờ duyệt đơn</p>
+    }*@
+        <p>Xác thực đơn hàng: </p>
+        @*<p>Tổng tiền thanh toán: 854000 VND</p>*@
+    </div>
 
 <table class="table" style="text-align:center; width:80%;align-content:center;margin-top:20px;margin-left:140px;">
     <tr>
@@ -29,17 +40,11 @@
         <th>
             Giá tiền
         </th>
-        <th>
-            Giảm giá
-        </th>
-        <th>
-            Địa chỉ giao hàng
-        </th>
         
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.MaDH)
@@ -55,16 +60,10 @@
             @Html.DisplayFor(modelItem => item.Soluong)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ThanhTien)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Giamgia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DonHang.DiaChiGiaoHang)
+            @Html.DisplayFor(modelItem => item.ThanhTien) VNĐ
         </td>
         
     </tr>
 }
-
 </table>
+

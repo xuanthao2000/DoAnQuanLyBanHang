@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -213,6 +214,7 @@
     <Compile Include="Areas\Admin\Controllers\LoaiSPsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhanviensController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanPhamsController.cs" />
+    <Compile Include="common\MailHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BagController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -277,6 +279,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\page.css" />
     <Content Include="Content\css\productDetails.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style-1.css" />
@@ -295,6 +298,8 @@
     <Content Include="Content\img\logo-white.png" />
     <Content Include="Content\img\logo-z.png" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Template\forgotPw.html" />
+    <Content Include="Content\Template\neworder.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -375,17 +380,12 @@
     <Content Include="Areas\Admin\Views\KhachHangs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\KhachHangs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\KhachHangs\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\DonHangs\Create.cshtml" />
     <Content Include="Areas\Admin\Views\DonHangs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\DonHangs\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\DonHangs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\DonHangs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DonHangs\UnapprovedOrder.cshtml" />
     <Content Include="Areas\Admin\Views\DonHangs\ApprovedOrder.cshtml" />
-    <Content Include="Areas\Admin\Views\CTDHs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\CTDHs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\CTDHs\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\CTDHs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CTDHs\Index.cshtml" />
     <EntityDeploy Include="Models\QLBanHangEF.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -394,6 +394,7 @@
     <Content Include="Models\QLBanHangEF.edmx.diagram">
       <DependentUpon>QLBanHangEF.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Nhanviens\EditInfo.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -406,7 +407,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -461,6 +464,8 @@
     <Content Include="Views\Login\Edit.cshtml" />
     <Content Include="Views\Login\myOrders.cshtml" />
     <Content Include="Views\Login\Details.cshtml" />
+    <Content Include="Views\Login\Delete.cshtml" />
+    <Content Include="Views\Login\ForgotPw.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

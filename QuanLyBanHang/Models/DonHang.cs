@@ -26,6 +26,7 @@ namespace QuanLyBanHang.Models
         public Nullable<System.DateTime> NgayLapHD { get; set; }
         public Nullable<System.DateTime> NgayGiaoHang { get; set; }
         public string DiaChiGiaoHang { get; set; }
+        public Nullable<int> ThanhTien { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTDH> CTDHs { get; set; }

@@ -20,6 +20,14 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         public ActionResult Index(string searchString,string currentFilter,int? page)
         {
             var lstProduct = db.SanPhams.Include(s => s.LoaiSP).ToList();
+            var a = db.SanPhams.Where(s => s.SoLuong < 10).ToList();
+            int b = 0;
+            for(int i=0;i< a.Count;i++)
+            {
+                b++;
+                Session["SPCannhap"] = b;
+            }
+            
             var spSearch = db.SanPhams.Where(s => s.TenSP.Contains(searchString)).ToList();
             int pageSize = 5;
             int pageNumber = (page ?? 1);
@@ -66,8 +74,9 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaSP,TenSP,DonGia,SoLuong,MaLoaiSP,HinhSP,DangGiamGia,MaGiamGia")] SanPham sanPham,HttpPostedFileBase HinhSP)
+        public ActionResult Create([Bind(Include = "MaSP,TenSP,DonGia,SoLuong,MaLoaiSP,HinhSP")] SanPham sanPham,HttpPostedFileBase HinhSP)
         {
+
             if (ModelState.IsValid)
             {
                 if(HinhSP != null && HinhSP.ContentLength >0)
@@ -107,7 +116,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaSP,TenSP,DonGia,SoLuong,MaLoaiSP,HinhSP,DangGiamGia,MaGiamGia")] SanPham sanPham, HttpPostedFileBase HinhUpload,string HinhSP)
+        public ActionResult Edit([Bind(Include = "MaSP,TenSP,DonGia,SoLuong,MaLoaiSP,HinhSP")] SanPham sanPham, HttpPostedFileBase HinhUpload,string HinhSP)
         {
             if (ModelState.IsValid)
             {

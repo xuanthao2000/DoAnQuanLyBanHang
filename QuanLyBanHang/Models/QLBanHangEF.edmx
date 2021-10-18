@@ -14,7 +14,6 @@
           <Property Name="MaSP" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Soluong" Type="int" />
           <Property Name="ThanhTien" Type="int" />
-          <Property Name="Giamgia" Type="int" />
         </EntityType>
         <EntityType Name="DonHang">
           <Key>
@@ -26,6 +25,7 @@
           <Property Name="NgayLapHD" Type="datetime" />
           <Property Name="NgayGiaoHang" Type="datetime" />
           <Property Name="DiaChiGiaoHang" Type="nchar" MaxLength="50" />
+          <Property Name="ThanhTien" Type="int" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -33,7 +33,7 @@
           </Key>
           <Property Name="MaKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenKH" Type="nvarchar" MaxLength="30" />
-          <Property Name="DiaChi" Type="nvarchar" MaxLength="30" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
           <Property Name="DienThoai" Type="nvarchar" MaxLength="7" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
@@ -69,8 +69,6 @@
           <Property Name="SoLuong" Type="int" />
           <Property Name="MaLoaiSP" Type="int" />
           <Property Name="HinhSP" Type="nvarchar(max)" />
-          <Property Name="DangGiamGia" Type="bit" />
-          <Property Name="MaGiamGia" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -187,7 +185,6 @@
           <Property Name="MaSP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Soluong" Type="Int32" />
           <Property Name="ThanhTien" Type="Int32" />
-          <Property Name="Giamgia" Type="Int32" />
           <NavigationProperty Name="DonHang" Relationship="Self.FK_CTDH_DonHang" FromRole="CTDH" ToRole="DonHang" />
           <NavigationProperty Name="SanPham" Relationship="Self.FK_CTDH_SanPham" FromRole="CTDH" ToRole="SanPham" />
         </EntityType>
@@ -201,6 +198,7 @@
           <Property Name="NgayLapHD" Type="DateTime" Precision="3" />
           <Property Name="NgayGiaoHang" Type="DateTime" Precision="3" />
           <Property Name="DiaChiGiaoHang" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ThanhTien" Type="Int32" />
           <NavigationProperty Name="CTDHs" Relationship="Self.FK_CTDH_DonHang" FromRole="DonHang" ToRole="CTDH" />
           <NavigationProperty Name="KhachHang" Relationship="Self.FK_DonHang_KhachHang" FromRole="DonHang" ToRole="KhachHang" />
           <NavigationProperty Name="Nhanvien" Relationship="Self.FK_DonHang_Nhanvien" FromRole="DonHang" ToRole="Nhanvien" />
@@ -211,7 +209,7 @@
           </Key>
           <Property Name="MaKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenKH" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="DiaChi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DienThoai" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -250,8 +248,6 @@
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="MaLoaiSP" Type="Int32" />
           <Property Name="HinhSP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DangGiamGia" Type="Boolean" />
-          <Property Name="MaGiamGia" Type="Int32" />
           <NavigationProperty Name="CTDHs" Relationship="Self.FK_CTDH_SanPham" FromRole="SanPham" ToRole="CTDH" />
           <NavigationProperty Name="LoaiSP" Relationship="Self.FK_SanPham_LoaiSP" FromRole="SanPham" ToRole="LoaiSP" />
         </EntityType>
@@ -369,7 +365,6 @@
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
                 <ScalarProperty Name="Soluong" ColumnName="Soluong" />
                 <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
-                <ScalarProperty Name="Giamgia" ColumnName="Giamgia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -382,6 +377,7 @@
                 <ScalarProperty Name="NgayLapHD" ColumnName="NgayLapHD" />
                 <ScalarProperty Name="NgayGiaoHang" ColumnName="NgayGiaoHang" />
                 <ScalarProperty Name="DiaChiGiaoHang" ColumnName="DiaChiGiaoHang" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -429,8 +425,6 @@
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="MaLoaiSP" ColumnName="MaLoaiSP" />
                 <ScalarProperty Name="HinhSP" ColumnName="HinhSP" />
-                <ScalarProperty Name="DangGiamGia" ColumnName="DangGiamGia" />
-                <ScalarProperty Name="MaGiamGia" ColumnName="MaGiamGia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

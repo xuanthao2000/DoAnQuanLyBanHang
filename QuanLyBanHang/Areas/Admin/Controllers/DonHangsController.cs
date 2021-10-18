@@ -17,8 +17,26 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // GET: Admin/DonHangs
         public ActionResult Index()
         {
-            var donHangs = db.DonHangs.Include(d => d.KhachHang).Include(d => d.Nhanvien);
-            return View(donHangs.ToList());
+            var donHangs = db.DonHangs.Include(d => d.KhachHang).Include(d => d.Nhanvien).ToList();
+            // Tổng đơn hàng
+            var dh = db.DonHangs.Select(s =>s).ToList();
+            int tongDH = 0;
+            for(int i=0;i<=dh.Count;i++)
+            {
+                tongDH++;
+            }
+            Session["TongDH"] = tongDH;
+            // Tổng  tiền
+            var thanhtien = db.DonHangs.Select(s => s).ToList();
+            int tongTien = 0;
+            for (int i = 0; i <= dh.Count; i++)
+            {
+                tongTien += i;
+            }
+            Session["TongTien"] = tongTien;
+
+
+            return View(donHangs);
         }
 
         // GET: Admin/DonHangs/Details/5
@@ -58,41 +76,6 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "TenKH", donHang.MaKH);
-            ViewBag.MaNV = new SelectList(db.Nhanviens, "MaNV", "HoNV", donHang.MaNV);
-            return View(donHang);
-        }
-
-        // GET: Admin/DonHangs/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DonHang donHang = db.DonHangs.Find(id);
-            if (donHang == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "TenKH", donHang.MaKH);
-            ViewBag.MaNV = new SelectList(db.Nhanviens, "MaNV", "HoNV", donHang.MaNV);
-            return View(donHang);
-        }
-
-        // POST: Admin/DonHangs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaDH,MaKH,MaNV,NgayLapHD,NgayGiaoHang,DiaChiGiaoHang")] DonHang donHang)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(donHang).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
             ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "TenKH", donHang.MaKH);
             ViewBag.MaNV = new SelectList(db.Nhanviens, "MaNV", "HoNV", donHang.MaNV);
             return View(donHang);

@@ -32,9 +32,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.NgayLapHD)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayGiaoHang)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.DiaChiGiaoHang)
             </th>
@@ -44,7 +42,6 @@
             <th>
                 Trạng thái
             </th>
-            <th></th>
         </tr>
 
         @foreach (var item in Model)
@@ -57,15 +54,11 @@
                     @Html.DisplayFor(modelItem => item.NgayLapHD)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NgayGiaoHang)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.DiaChiGiaoHang)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
                 </td>
-                <td>
                 <td>
                     @if (item.NgayGiaoHang != null)
                     {
@@ -76,9 +69,8 @@
                         <p style="color:red;">Chờ phê duyệt</p>
                     }
                 </td>
-                </td>
+                
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MaDH }) |
                     @Html.ActionLink("Details", "Details", new { id = item.MaDH }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.MaDH })
                     <a class="btn" href="@Url.Action("Browser","DonHangs", new {id = item.MaDH})" onclick="logOut()" style="margin-left:20px;background-color:#007bff;color:#fff"><i class="fas fa-shopping-cart"></i> Duyệt đơn </a>

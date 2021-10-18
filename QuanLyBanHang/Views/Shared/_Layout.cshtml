@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -28,7 +27,7 @@
 </head>
 
 <body>
-    @RenderBody()
+    
     <!-- --header-- -->
     <div class="container-fluid header">
         <div class="container-fluid fixed-top bg-light">
@@ -54,9 +53,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index","TShirt", new {})" tabindex="-1" aria-disabled="false">ÁO THUN</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index","Bag", new {})" tabindex="-1" aria-disabled="true">PHỤ KIỆN</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index","Shirt", new {})" tabindex="-1" aria-disabled="true">SƠ MI</a>
                         </li>
@@ -65,6 +62,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index","Trousers", new {})" tabindex="-1" aria-disabled="true">QUẦN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index","Bag", new {})" tabindex="-1" aria-disabled="true">PHỤ KIỆN</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index","Contact",new {})" tabindex="-1" aria-disabled="true">LIÊN HỆ</a>
@@ -82,7 +82,7 @@
                          }
                          else
                          {
-                            <a href="@Url.Action("myOrders", "Login", new { })" onclick="checkLogin()">
+                            <a href="@Url.Action("Edit", "Login", new { })" onclick="checkLogin()">
                                 <i class="fas fa-user"></i>
                             </a>
                          }
@@ -109,7 +109,7 @@
                         <button type="submit" class="form-control btn" style="">
 
                         </button>*@
-                        @using (Html.BeginForm("Index", "Home"))
+                        @using (Html.BeginForm("Index"))
                         { 
                         @Html.TextBox("search") <input type="submit" value="Search"/>
                         }
@@ -137,7 +137,7 @@
         </div>
 
     </div>
-
+    @RenderBody()
     <!-- ---- -->
     <!-- --body-- -->
     

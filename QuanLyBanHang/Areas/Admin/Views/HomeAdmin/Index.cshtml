@@ -14,7 +14,7 @@
             <div class="card bg-primary text-white mb-4">
                 <div class="card-body">Tổng đơn</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <h5>47</h5>
+                    <h5>@Convert.ToInt32(Session["TongDH"])</h5>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
             <div class="card bg-warning text-white mb-4">
                 <div class="card-body">Thu nhập</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <h5>3.567.324 VNĐ</h5>
+                    <h5>@Convert.ToInt32(Session["TongTien"]) VNĐ</h5>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>

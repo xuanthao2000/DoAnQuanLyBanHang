@@ -6,8 +6,23 @@
 }
 
 <div style="margin-top:100px;margin-left:140px;width:80%;">
+   
+
+
+    <div style="margin-top:20px;margin-bottom:20px;">
+        <a href=@Url.Action("Edit", "Login") class="btn btn-light" style="border-color:black">
+            <i class="fas fa-user"></i>
+            <span class="text" h> Sửa thông tin cá nhân</span>
+        </a>
+        <a href=@Url.Action("myOrders", "Login") class="btn btn-light" style="border-color:black">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="text" h> Xem các đơn hàng đã đặt</span>
+        </a>
+
+        <a class="btn" href="~/Login/Logout" onclick="logOut()" style="background-color:#007bff;color:#fff">Đăng xuất <i class="fas fa-sign-out-alt"></i></a>
+    </div>
     <h1>DANH SÁCH CÁC ĐƠN HÀNG CỦA TÔI</h1>
-    <table class="table" style="margin-top:30px;text-align:center;   ">
+    <table class="table" style="margin-top:30px;   ">
         <tr>
             <th>
                Mã đơn hàng
@@ -23,6 +38,9 @@
             </th>
             <th>
                 Trạng thái
+            </th>
+            <th>
+                Thanh tiền
             </th>
             <th></th>
         </tr>
@@ -53,7 +71,16 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.MaDH })
+                    @Html.DisplayFor(modelItem => item.ThanhTien)
+                </td>
+                <td>
+                    @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaDH })
+                </td>
+                <td>
+                    @if (item.NgayGiaoHang == null)
+                    {
+                        <a class="btn" href="@Url.Action("Delete","Login", new {id = item.MaDH})" onclick="logOut()" style="background-color:red;color:#fff;width:110px"><i class="fas fa-window-close"></i> Hủy đơn </a>
+                    }
                 </td>
             </tr>
         }

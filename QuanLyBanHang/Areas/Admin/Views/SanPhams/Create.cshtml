@@ -64,24 +64,6 @@
         </div>
 
         <div class="form-group">
-            <label style="margin-left:11px;">Đang giảm giá</label>
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.DangGiamGia)
-                    @Html.ValidationMessageFor(model => model.DangGiamGia, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label style="margin-left:11px;">Mã giảm giá</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MaGiamGia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MaGiamGia, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Thêm" class="btn btn-default" />
             </div>

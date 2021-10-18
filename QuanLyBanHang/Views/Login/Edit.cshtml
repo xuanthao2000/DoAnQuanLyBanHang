@@ -13,18 +13,23 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="~/Content/css/style-1.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
-    <script async defer crossorigin="anonymous"
-            src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0"></script>
+
 </head>
 
 <body>
-
+    
     <div class="container-fluid banner">
+        <div style="margin-top:70px;margin-left:250px;margin-bottom:20px;">
+            <a href=@Url.Action("Edit", "Login") class="btn btn-light" style="border-color:black">
+                <i class="fas fa-user"></i>
+                <span class="text" h> Sửa thông tin cá nhân</span>
+            </a>
+            <a href=@Url.Action("myOrders", "Login") class="btn btn-light" style="border-color:black">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="text" h> Xem các đơn hàng đã đặt</span>
+                
+            </a>
+        </div>
         <div class="container">
 
             <div class="row">
@@ -60,10 +65,11 @@
 
                                 <hr />
                                 <div class="form-group">
-                                    <p>Tên đăng nhập:</p>
                                     <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Email, @*new { htmlAttributes = new { @disabled = "disabled" }*@new { htmlAttributes = new { @class = "form-control" } })<br />
-                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        <p style="margin-bottom:10px;">Tên đăng nhập:</p>
+
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @disabled = "disabled" , @class = "form-control" } })<br />
+
                                     </div>
                                 </div>
 
@@ -71,31 +77,35 @@
                                 @Html.HiddenFor(model => model.MaKH)
 
                                 <div class="form-group">
-                                   <p> Họ tên khách hàng:</p>
+                                    
                                     <div class="col-md-10">
+                                        <p style="margin-bottom:10px;">Họ tên khách hàng:</p> 
                                         @Html.EditorFor(model => model.TenKH, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    Giới tính
+                                    
                                     <div class="col-md-10">
+                                        <p style="margin-bottom:10px;">Giới tính: </p> 
                                         @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    Địa chỉ:
+                                    
                                     <div class="col-md-10">
+                                        <p style="margin-bottom:10px;">Địa chỉ:  </p> 
                                         @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    Số điện thoại:
+                                    
                                     <div class="col-md-10">
+                                        <p style="margin-bottom:10px;">Số điện thoại:  </p> 
                                         @Html.EditorFor(model => model.DienThoai, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
                                     </div>
@@ -103,20 +113,21 @@
 
                                 <div class="col-12 form-group">
                                     <label for="">Mật khẩu cũ</label>
-                                    <input class="form-control mt-1" type="password" name="oldPw">
+                                    <input class="form-control mt-1" type="password" name="oldPw" style="width:660px;">
 
                                 </div>
                                 <div class="form-group">
-                                    Mật khẩu mới
+                                   
                                     <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { type = "password" } })
+                                        <p style="margin-bottom:10px;">Mật khẩu mới:  </p> 
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control",type = "password" } })
                                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 
                                 <div class="col-12 form-group">
                                     <label for="">Xác nhận mật khẩu mới</label>
-                                    <input class="form-control mt-1" type="password" name="confirmPw">
+                                    <input class="form-control mt-1" type="password" name="confirmPw" style="width:660px;">
                                     
                                 </div>
                                 </div>
@@ -127,59 +138,7 @@
                                 </div>
                             
                         }
-                        @*<div class="form-row">
-                                <div class="col-6 form-group">
-                                    <label class="" for="">Tên đăng nhập</label>
-                                    <input class="form-control mt-1" type="text" id="username" placeholder="@Session["Email"]" disabled>
-                                    <small id="emailHelp" class="form-text text-muted">Bạn không thể thay đổi tên đăng nhập!!!</small>
-                                </div>
-
-                                @Html.HiddenFor(model => model.MaKH)
-
-                                <div class="col-6 form-group">
-                                    <label class="" for="">Họ Tên</label>
-                                    <input class="form-control mt-1" type="text" id="hoten">
-                                </div>
-                                <div class="col-6 form-group">
-                                    <label for="">Số điện thoại</label>
-                                    <input class="form-control mt-1" type="text" id="sdt" placeholder="Số Điện Thoại">
-
-                                </div>
-                                <div class="col-6 form-group">
-                                    <label for="">Giới tính</label>
-                                    <input class="form-control mt-1" type="text" id="gioitinh" placeholder="Giới tính">
-
-                                </div>
-                                <div class="col-12 form-group">
-                                    <label for="">Địa chỉ</label>
-                                    <input class="form-control mt-1" type="text" id="diachi" placeholder="Địa chỉ">
-
-                                </div>
-                                <div class="col-12 form-group">
-                                    <label for="">Mật khẩu cũ</label>
-                                    <input class="form-control mt-1" type="password" id="mkcu">
-
-                                </div>
-                                <div class="col-12 form-group">
-                                    <label for="">Mật khẩu mới</label>
-                                    <input class="form-control mt-1" type="password" id="mkmoi">
-
-                                </div>
-                                <div class="col-12 form-group">
-                                    <label for="">Xác nhận mật khẩu mới</label>
-                                    <input class="form-control mt-1" type="password" id="xacnhanmkmoi">
-
-                                </div>
-                                <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Lưu thông tin " class="btn btn-default" />
-                                </div>
-                            </div>
-
-                                <div class="" id="update">
-
-                                </div>
-                            </div>*@
+                       
                     </div>
 
                 </div>

@@ -19,7 +19,10 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         {
             return View(db.KhachHangs.ToList());
         }
-
+        public List<KhachHang> DSKH()
+        {
+            return db.KhachHangs.ToList();
+        }
         // GET: Admin/KhachHangs/Details/5
         public ActionResult Details(int? id)
         {
@@ -48,11 +51,22 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaKH,TenKH,DiaChi,DienThoai,Email,Password")] KhachHang khachHang)
         {
+            KhachHang mailkh = db.KhachHangs.Where(x => x.Email == khachHang.Email).FirstOrDefault();
+            Nhanvien mailNV = db.Nhanviens.Where(x => x.Email == khachHang.Email).FirstOrDefault();
             if (ModelState.IsValid)
             {
-                db.KhachHangs.Add(khachHang);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (mailkh == null && mailNV == null)
+                {
+                    db.KhachHangs.Add(khachHang);
+                    db.SaveChanges();
+                    ViewBag.Message = "Bạn đã tạo tài khoản thành công";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("mailkh", "Email đã tồn tại, vui lòng kiểm tra lại !");
+                    ViewBag.Message = "Email đã tồn tại, vui lòng kiểm tra lại !";
+                }
             }
 
             return View(khachHang);
@@ -78,11 +92,12 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaKH,TenKH,DiaChi,DienThoai,Email,Password")] KhachHang khachHang)
+        public ActionResult Edit([Bind(Include = "MaKH,TenKH,GioiTinh,DiaChi,DienThoai,Password")] KhachHang khachHang)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(khachHang).State = EntityState.Modified;
+                khachHang.Email = (string)Session["EmailNv"];
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

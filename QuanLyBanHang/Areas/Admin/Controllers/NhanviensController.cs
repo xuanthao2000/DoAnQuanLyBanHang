@@ -17,7 +17,8 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // GET: Admin/Nhanviens
         public ActionResult Index()
         {
-            return View(db.Nhanviens.ToList());
+            var nv = db.Nhanviens.Where(s => s.Admin == false).ToList();
+            return View(nv);
         }
 
         // GET: Admin/Nhanviens/Details/5
@@ -48,11 +49,20 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaNV,HoNV,Ten,Diachi,Dienthoai,Email,Password,Admin")] Nhanvien nhanvien)
         {
+            Nhanvien mailNV = db.Nhanviens.Where(x => x.Email == nhanvien.Email).FirstOrDefault();
+            KhachHang mailKH = db.KhachHangs.Where(x => x.Email == nhanvien.Email).FirstOrDefault();
             if (ModelState.IsValid)
             {
-                db.Nhanviens.Add(nhanvien);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if(mailNV == null && mailKH == null)
+                {  
+                    db.Nhanviens.Add(nhanvien);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Message = "Email đã tồn tại, vui lòng kiểm tra lại !";
+                }
             }
 
             return View(nhanvien);
@@ -122,6 +132,35 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult EditInfo(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Nhanvien nhanvien = db.Nhanviens.Find(id);
+            if (nhanvien == null)
+            {
+                return HttpNotFound();
+            }
+            return View(nhanvien);
+        }
+
+        // POST: Admin/Nhanviens/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditInfo([Bind(Include = "MaNV,HoNV,Ten,Diachi,Dienthoai,Email,Password,Admin")] Nhanvien nhanvien)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(nhanvien).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(nhanvien);
         }
     }
 }
