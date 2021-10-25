@@ -18,7 +18,11 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var cTDHs = db.CTDHs.Include(c => c.DonHang).Include(c => c.SanPham);
-            return View(cTDHs.ToList());
+            var ctdh = cTDHs.OrderByDescending(s => s.MaDH).ToList();
+            if (Session["MaNV"] == null)
+                return Redirect("~/Login/Index");
+            else
+                return View(ctdh.ToList());
         }
 
         // GET: Admin/CTDHs/Details/5

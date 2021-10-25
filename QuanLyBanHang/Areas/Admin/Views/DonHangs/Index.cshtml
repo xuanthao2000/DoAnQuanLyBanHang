@@ -1,28 +1,32 @@
-﻿@model IEnumerable<QuanLyBanHang.Models.DonHang>
+﻿@model PagedList.IPagedList<QuanLyBanHang.Models.DonHang>
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<br />
-<h2>Đơn hàng</h2>
+<html>
+<head>
+    <link href="~/Content/css/page.css" rel="stylesheet" />
+</head>
 
-@*<p>
-    @Html.ActionLink("Thêm đơn hàng mới", "Create")
-</p>*@
-<div style="margin-top:20px;margin-left:13px;">
-    <a href="" class="btn btn-light" style="border-color:black">
-        <span class="text" h> Tất cả đơn hàng</span>
-        <i class="fas fa-arrow-up"></i>
-    </a>
-    <a href=@Url.Action("UnapprovedOrder", "DonHangs") class="btn btn-light" style="border-color:black">
-        <span class="text" h> Đơn hàng chưa duyệt</span>
-        <i class="fas fa-arrow-down"></i>
-    </a>
-    <a href=@Url.Action("ApprovedOrder", "DonHangs") class="btn btn-light" style="border-color:black">
-        <span class="text" h> Đơn hàng đã duyệt</span>
-        <i class="fas fa-arrow-down"></i>
-    </a>
+<body>
+    <br />
+    <h2>Đơn hàng</h2>
+    <p style="color:red;"> Số lượng đơn hàng cần duyệt: @Session["DHCanDuyet"]</p>
+    <div style="margin-top:20px;margin-left:13px;">
+        <a href="" class="btn btn-light" style="border-color:black">
+            <span class="text" h> Tất cả đơn hàng</span>
+            <i class="fas fa-arrow-up"></i>
+        </a>
+        <a href=@Url.Action("UnapprovedOrder", "DonHangs") class="btn btn-light" style="border-color:black">
+            <span class="text" h> Đơn hàng chưa duyệt</span>
+            <i class="fas fa-arrow-down"></i>
+        </a>
+        <a href=@Url.Action("ApprovedOrder", "DonHangs") class="btn btn-light" style="border-color:black">
+            <span class="text" h> Đơn hàng đã duyệt</span>
+            <i class="fas fa-arrow-down"></i>
+        </a>
     </div>
     <table class="table">
         <tr>
@@ -32,21 +36,18 @@
             <th>
                 Ngày lập đơn
             </th>
-            @*<th>
-                Ngày giao hàng
-            </th>*@
             <th>
                 Tên KH
             </th>
             <th>
                 Địa chỉ giao
             </th>
-            
+
             <th>
                 Thành tiền
             </th>
             <th>
-               Trạng thái
+                Trạng thái
             </th>
             <th></th>
         </tr>
@@ -60,41 +61,43 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.NgayLapHD)
                 </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.NgayGiaoHang)
-                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DiaChiGiaoHang)
                 </td>
-                
+
                 <td>
                     @Html.DisplayFor(modelItem => item.ThanhTien)
                 </td>
                 <td>
-                    @if(item.NgayGiaoHang != null)
+                    @if (item.NgayGiaoHang != null)
                     {
-                    <p style="color:#17850D">Đã duyệt</p>
-                    }else
-                    {
-                    <p style="color:red;">Chờ phê duyệt</p>
-                    }
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.MaDH }) |
-                    @if (item.NgayGiaoHang == null)
-                    {
-                        <a class="btn" href="@Url.Action("Delete","DonHangs", new {id = item.MaDH})" onclick="logOut()" style="background-color:red;color:#fff;width:110px"><i class="fas fa-window-close"></i> Hủy đơn </a>
-                        <a class="btn" href="@Url.Action("Browser", "DonHangs", new { id = item.MaDH })" onclick="logOut()" style="background-color:#007bff;color:#fff;";><i class="fas fa-check"></i> Duyệt đơn </a>
+                        <p style="color:#17850D">Đã duyệt</p>
                     }
                     else
                     {
-                    <a class="btn" href="@Url.Action("Delete","DonHangs", new {id = item.MaDH})" onclick="logOut()" style="background-color:red;color:#fff;width:110px"><i class="fas fa-window-close"></i> Hủy đơn </a>
+                        <p style="color:red;">Chờ phê duyệt</p>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MaDH })
+                    @if (item.NgayGiaoHang == null)
+                    {
+                        <a class="btn" href="@Url.Action("Browser", "DonHangs", new { id = item.MaDH })" onclick="logOut()" style="background-color:#007bff;color:#fff;" ;><i class="fas fa-check"></i> Duyệt đơn </a>
+                        <a class="btn" href="@Url.Action("Delete","DonHangs", new {id = item.MaDH})" onclick="logOut()" style="background-color:red;color:#fff;width:110px"><i class="fas fa-window-close"></i> Hủy đơn </a>
                     }
                 </td>
             </tr>
         }
 
     </table>
+    <div style="margin-left:20px;">
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) đến trang @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+</body>
+</html>

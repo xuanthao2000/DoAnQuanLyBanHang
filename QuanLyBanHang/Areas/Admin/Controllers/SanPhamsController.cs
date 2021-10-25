@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using QuanLyBanHang.Models;
 using PagedList;
 using System.IO;
+using QuanLyBanHang.Areas.Admin.Controllers;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
 {
@@ -19,19 +20,19 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // GET: Admin/SanPhams
         public ActionResult Index(string searchString,string currentFilter,int? page)
         {
+            sanPhamCanNhap();
+
             var lstProduct = db.SanPhams.Include(s => s.LoaiSP).ToList();
-            var a = db.SanPhams.Where(s => s.SoLuong < 10).ToList();
-            int b = 0;
-            for(int i=0;i< a.Count;i++)
-            {
-                b++;
-                Session["SPCannhap"] = b;
-            }
-            
+
+            // Phân trang
             var spSearch = db.SanPhams.Where(s => s.TenSP.Contains(searchString)).ToList();
-            int pageSize = 5;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
-            if (searchString != null)
+            if (Session["MaNV"] == null)
+            { 
+                return Redirect("~/Login/Index");
+            }
+            else if (searchString != null)
             {
                 page = 1;
                 return View(spSearch.ToPagedList(pageNumber,pageSize));
@@ -43,8 +44,16 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 
                 return View(lstProduct.ToPagedList(pageNumber, pageSize));
             }
-           
-
+        }
+        public void sanPhamCanNhap()
+        {
+            var a = db.SanPhams.Where(s => s.SoLuong < 10).ToList();
+            int b = 0;
+            for (int i = 0; i < a.Count; i++)
+            {
+                b++;
+                Session["SPCannhap"] = b;
+            }
         }
 
         // GET: Admin/SanPhams/Details/5
@@ -88,13 +97,15 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 }
                 db.SanPhams.Add(sanPham);
                 db.SaveChanges();
+                SetAlert("Thêm sản phẩm thành công","success");
                 return RedirectToAction("Index");
+                
             }
 
             ViewBag.MaLoaiSP = new SelectList(db.LoaiSPs, "MaLoaiSP", "TenLoaiSP", sanPham.MaLoaiSP);
             return View(sanPham);
         }
-
+        
         // GET: Admin/SanPhams/Edit/5
         public ActionResult Edit(string id)
         {
@@ -133,7 +144,8 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 }
                 db.Entry(sanPham).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                SetAlert("Sửa sản phẩm thành công", "success");
+                return RedirectToAction("Edit");
             }
             ViewBag.MaLoaiSP = new SelectList(db.LoaiSPs, "MaLoaiSP", "TenLoaiSP", sanPham.MaLoaiSP);
             return View(sanPham);
@@ -168,7 +180,9 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             }
             db.SanPhams.Remove(sanPham);
             db.SaveChanges();
+            SetAlert("Xóa sản phẩm thành công", "success");
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)
@@ -178,6 +192,23 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert-success";
+            }
+            else if (type == "warning")
+            {
+                TempData["AlertType"] = "alert-warning";
+            }
+            else if (type == "error")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
         }
     }
 }

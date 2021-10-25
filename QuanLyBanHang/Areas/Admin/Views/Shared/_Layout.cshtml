@@ -16,6 +16,7 @@
           crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
             crossorigin="anonymous"></script>
+    <script src="~/Areas/Admin/dist/sb-admin-2.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -74,12 +75,12 @@
                         }
                         else
                         { }
-                        
+
                         <a class="nav-link" href="@Url.Action("Index","KhachHangs",new {})">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Quản lí khách hàng
                         </a>
-                        
+
                         <div class="sb-sidenav-menu-heading">Quản lý đơn hàng</div>
                         <a class="nav-link" href="@Url.Action("Index","DonHangs",new {})">
                             <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i> </div>
@@ -153,11 +154,11 @@
                     }
                     else if (Convert.ToBoolean(Session["Admin"]) == false)
                     {
-                        <p>Employee</p> 
+                        <p>Employee</p>
                     }
                     else
                     {
-                        <p></p> 
+                        <p></p>
                     }
                     <div>
                         <a class="nav-link" href="@Url.Action("EditInfo","NhanViens",new { id = @Convert.ToInt32(Session["MaNV"]) })">
@@ -166,14 +167,22 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <a class="nav-link" href="~/Login/Logout">
                     <div class="fas fa-sign-out-alt"><i class="fas fa-table"></i></div>
                     Logout
                 </a>
             </nav>
         </div>
+
         <div id="layoutSidenav_content">
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                    @TempData["AlertMessage"]
+                </div>
+            }
+
             @RenderBody()
         </div>
         <!-- Button trigger modal -->

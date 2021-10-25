@@ -17,9 +17,9 @@
 
 
     <p>
-        @Html.ActionLink("Thêm sản phẩm mới", "Create")
+        @Html.ActionLink("Thêm sản phẩm mới", "Create")</p>
         <p style="color:red;"> Số lượng sản phẩm cần nhập hàng: @Session["SPCannhap"]</p>
-    </p>
+    
     @using (Html.BeginForm("Index", "SanPhams"))
     {
         <p>Tìm tên sản phẩm: @Html.TextBox("searchString") <input type="submit" value="Search" /></p>

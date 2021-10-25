@@ -4,10 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-@if (Session["Admin"] != null)
-{
-    if ((bool)Session["Admin"] == true)
-    { 
+
 <h2>Quản lý nhân viên</h2>
 
 <p>
@@ -66,13 +63,3 @@
 }
 
 </table>
-    }
-    else
-    {
-        <h4>Bạn không có quyền quản lý nhân viên</h4>
-    }
-}
-else
-{
-    <h4>Bạn không thể quản lý nhân viên. Bạn phải đăng nhập <a class="nav-link" href="~/Login/Index"> Đăng nhập</a></h4>
-}

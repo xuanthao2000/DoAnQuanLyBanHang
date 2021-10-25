@@ -17,7 +17,10 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // GET: Admin/LoaiSPs
         public ActionResult Index()
         {
-            return View(db.LoaiSPs.ToList());
+            if (Session["MaNV"] == null)
+                return Redirect("~/Login/Index");
+            else
+                return View(db.LoaiSPs.ToList());
         }
 
         // GET: Admin/LoaiSPs/Details/5

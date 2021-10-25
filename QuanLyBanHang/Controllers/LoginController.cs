@@ -41,7 +41,7 @@ namespace QuanLyBanHang.Controllers
 
                 if (userDetails == null && NhanViens == null)
                 {
-                    customer.LoginErrorMessage = "Tên tài khoản và mật khẩu không được bỏ trống.";
+                    customer.LoginErrorMessage = "Sai tên tài khoản hoặc mật khẩu. Vui lòng nhập lại!";
                     return View("Index", customer);
                 }
                 else if (userDetails != null)
@@ -118,9 +118,6 @@ namespace QuanLyBanHang.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //KhachHang a = db.KhachHangs.Find(id);
-            //var pw = a.Password;
-            //Session["pwCu"] = pw;
             KhachHang khachHang = db.KhachHangs.Find(id);
             if (khachHang == null)
             {
@@ -132,31 +129,16 @@ namespace QuanLyBanHang.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaKH,TenKH,DiaChi,GioiTinh,DienThoai,Password")] KhachHang khachHang,FormCollection frm)
+        public ActionResult Edit([Bind(Include = "MaKH,TenKH,DiaChi,GioiTinh,DienThoai,Password")] KhachHang khachHang)
         {
 
-
-            string cfPw = frm["confirmPw"].ToString();
-            //string oldPw = frm["oldPw"].ToString();
            
             if (ModelState.IsValid)
             {
-                //if (oldPw != (string)Session["pw"])
-                //{
-                    if (khachHang.Password == cfPw)
-                    {
                     db.Entry(khachHang).State = EntityState.Modified;
                     khachHang.Email = (string)Session["Email"];
                     db.SaveChanges();
-                    }else
-                    {
-                        khachHang.LoginErrorMessage = "Xác nhận mật khẩu sai";
-                    }
-                //}
-                //else
-                //{
-                //    khachHang.LoginErrorMessage = "Mật khẩu cũ sai";
-                //}
+
                 return RedirectToAction("Edit","Login");
             }
             return View(khachHang);
@@ -244,7 +226,7 @@ namespace QuanLyBanHang.Controllers
             //content = content.Replace("{{Total}}", total.ToString("N0"));
             var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
-            new MailHelper().SendMail(email, "Đơn hàng mới từ Shein Shop", content);
+            new MailHelper().SendMail(email, "Mật khẩu mới từ Shein Shop", content);
             new MailHelper().SendMail(toEmail, "Mật khẩu mới từ Shein Shop", content);
 
             KhachHang kh = db.KhachHangs.Where(s => s.Email == email).SingleOrDefault();

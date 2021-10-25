@@ -7,9 +7,6 @@
 
 <h2>Đơn hàng đã duyệt</h2>
 
-<p>
-    @Html.ActionLink("Thêm đơn hàng mới", "Create")
-</p>
 <div style="margin-top:20px;margin-left:13px;">
     <a href=@Url.Action("Index", "DonHangs") class="btn btn-light" style="border-color:black">
         <span class="text" h> Tất cả đơn hàng</span>
@@ -65,7 +62,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
             </td>
-            <td>
+            
             <td>
                 @if (item.NgayGiaoHang != null)
                 {
@@ -76,11 +73,9 @@
                     <p style="color:red;">Chờ phê duyệt</p>
                 }
             </td>
-            </td>
+            
             <td>
-                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaDH }) |
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaDH }) |
-                <a class="btn" href="@Url.Action("Delete","DonHangs", new {id = item.MaDH})" onclick="logOut()" style="background-color:red;color:#fff">X Hủy đơn </a>
+                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaDH }) 
             </td>
         </tr>
     }

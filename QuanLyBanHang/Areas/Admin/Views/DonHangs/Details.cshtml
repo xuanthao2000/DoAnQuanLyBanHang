@@ -1,65 +1,64 @@
-﻿@model QuanLyBanHang.Models.DonHang
+﻿@model IEnumerable<QuanLyBanHang.Models.CTDH>
+@using QuanLyBanHang.Models
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Đơn hàng</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayLapHD)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayLapHD)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayGiaoHang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayGiaoHang)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiaChiGiaoHang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiaChiGiaoHang)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.KhachHang.TenKH)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.KhachHang.TenKH)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nhanvien.HoNV)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nhanvien.HoNV)
-        </dd>
-        <dt>
-            Thành tiền
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ThanhTien)
-        </dd>
-
-    </dl>
+<div style="margin-top:50px;margin-left:10px;line-height:1.5;">
+    <h2>CHI TIẾT ĐƠN HÀNG</h2>
 </div>
+
+<table class="table" style="text-align:center; width:80%;align-content:center;margin-left:10px;">
+    <tr>
+        <th>
+            Mã đơn hàng
+        </th>
+
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Hình sản phẩm
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Giá tiền
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDH)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SanPham.TenSP)
+            </td>
+            <td>
+                @Html.Image("../../../../" + @item.SanPham.HinhSP, @item.SanPham.HinhSP, "80")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soluong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThanhTien) VNĐ
+            </td>
+
+        </tr>
+    }
+</table>
+
+
+
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaDH }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Trở về danh sách đơn hàng", "Index")
 </p>

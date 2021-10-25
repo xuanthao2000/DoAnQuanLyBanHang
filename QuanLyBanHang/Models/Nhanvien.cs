@@ -36,7 +36,7 @@ namespace QuanLyBanHang.Models
         [EmailAddress(ErrorMessage = "Email không hợp lệ")]
         [Required(ErrorMessage = "Bạn chưa nhập Email")]
         public string Email { get; set; }
-        [MinLength(7, ErrorMessage = "Số ký tự tối thiểu là 7 ký tự")]
+        [MinLength(5, ErrorMessage = "Số ký tự tối thiểu là 5 ký tự")]
         [StringLength(30, ErrorMessage = "Số ký tự tối đa là 30 ký tự")]
         [Required(ErrorMessage = "Bạn chưa nhập mật khẩu")]
         public string Password { get; set; }

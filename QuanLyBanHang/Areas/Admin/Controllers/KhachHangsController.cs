@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using QuanLyBanHang.Models;
 
+
 namespace QuanLyBanHang.Areas.Admin.Controllers
 {
     public class KhachHangsController : Controller
@@ -17,7 +18,10 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // GET: Admin/KhachHangs
         public ActionResult Index()
         {
-            return View(db.KhachHangs.ToList());
+            if (Session["MaNV"] == null)
+                return Redirect("~/Login/Index");
+            else
+                return View(db.KhachHangs.ToList());
         }
         public List<KhachHang> DSKH()
         {
@@ -49,7 +53,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaKH,TenKH,DiaChi,DienThoai,Email,Password")] KhachHang khachHang)
+        public ActionResult Create([Bind(Include = "MaKH,TenKH,GioiTinh,DiaChi,DienThoai,Email,Password")] KhachHang khachHang)
         {
             KhachHang mailkh = db.KhachHangs.Where(x => x.Email == khachHang.Email).FirstOrDefault();
             Nhanvien mailNV = db.Nhanviens.Where(x => x.Email == khachHang.Email).FirstOrDefault();
@@ -59,7 +63,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 {
                     db.KhachHangs.Add(khachHang);
                     db.SaveChanges();
-                    ViewBag.Message = "Bạn đã tạo tài khoản thành công";
+                    SetAlert("Thêm khách hàng thành công", "success");
                     return RedirectToAction("Index");
                 }
                 else
@@ -73,37 +77,26 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         }
 
         // GET: Admin/KhachHangs/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            KhachHang khachHang = db.KhachHangs.Find(id);
-            if (khachHang == null)
-            {
-                return HttpNotFound();
-            }
-            return View(khachHang);
-        }
 
-        // POST: Admin/KhachHangs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        public ActionResult Edit(int id)
+        {
+            KhachHang kh = db.KhachHangs.FirstOrDefault(x => x.MaKH == id);
+            return View(kh);
+        }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaKH,TenKH,GioiTinh,DiaChi,DienThoai,Password")] KhachHang khachHang)
+        public ActionResult Edit(KhachHang k)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(khachHang).State = EntityState.Modified;
-                khachHang.Email = (string)Session["EmailNv"];
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(khachHang);
-        }
-
+            KhachHang ukh = db.KhachHangs.Find(k.MaKH);
+            ukh.MaKH = k.MaKH;
+            ukh.TenKH = k.TenKH;
+            ukh.DiaChi = k.DiaChi;
+            ukh.DienThoai = k.DienThoai;
+            ukh.GioiTinh = k.GioiTinh;
+            ukh.Password = k.Password;
+            db.SaveChanges();
+            SetAlert("Sửa khách hàng thành công", "success");
+            return RedirectToAction("Edit");
+        }    
         // GET: Admin/KhachHangs/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -127,6 +120,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             KhachHang khachHang = db.KhachHangs.Find(id);
             db.KhachHangs.Remove(khachHang);
             db.SaveChanges();
+            SetAlert("Xóa khách hàng thành công", "success");
             return RedirectToAction("Index");
         }
 
@@ -137,6 +131,23 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert-success";
+            }
+            else if (type == "warning")
+            {
+                TempData["AlertType"] = "alert-warning";
+            }
+            else if (type == "error")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
         }
     }
 }

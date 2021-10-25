@@ -18,7 +18,11 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var nv = db.Nhanviens.Where(s => s.Admin == false).ToList();
-            return View(nv);
+            if (Session["MaNV"] == null)
+                return Redirect("~/Login/Index");
+            else
+                return View(nv);
+
         }
 
         // GET: Admin/Nhanviens/Details/5
@@ -57,6 +61,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 {  
                     db.Nhanviens.Add(nhanvien);
                     db.SaveChanges();
+                    SetAlert("Thêm nhân viên thành công", "success");
                     return RedirectToAction("Index");
                 }
                 else
@@ -69,34 +74,24 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         }
 
         // GET: Admin/Nhanviens/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Nhanvien nhanvien = db.Nhanviens.Find(id);
-            if (nhanvien == null)
-            {
-                return HttpNotFound();
-            }
-            return View(nhanvien);
+            Nhanvien kh = db.Nhanviens.FirstOrDefault(x => x.MaNV == id);
+            return View(kh);
         }
-
-        // POST: Admin/Nhanviens/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaNV,HoNV,Ten,Diachi,Dienthoai,Email,Password,Admin")] Nhanvien nhanvien)
+        public ActionResult Edit(Nhanvien n)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(nhanvien).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(nhanvien);
+            Nhanvien unv = db.Nhanviens.Find(n.MaNV);
+            unv.MaNV = n.MaNV;
+            unv.HoNV = n.HoNV;
+            unv.Ten = n.Ten;
+            unv.Diachi = n.Diachi;
+            unv.Dienthoai = n.Dienthoai;
+            unv.Password = n.Password;
+            db.SaveChanges();
+            SetAlert("Sửa nhân viên thành công", "success");
+            return RedirectToAction("Edit");
         }
 
         // GET: Admin/Nhanviens/Delete/5
@@ -122,6 +117,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             Nhanvien nhanvien = db.Nhanviens.Find(id);
             db.Nhanviens.Remove(nhanvien);
             db.SaveChanges();
+            SetAlert("Xóa nhân viên thành công", "success");
             return RedirectToAction("Index");
         }
 
@@ -158,9 +154,27 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             {
                 db.Entry(nhanvien).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                SetAlert("Cập nhật thông tin thành công", "success");
+                return RedirectToAction("EditInfo");
             }
             return View(nhanvien);
+        }
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert-success";
+            }
+            else if (type == "warning")
+            {
+                TempData["AlertType"] = "alert-warning";
+            }
+            else if (type == "error")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
         }
     }
 }

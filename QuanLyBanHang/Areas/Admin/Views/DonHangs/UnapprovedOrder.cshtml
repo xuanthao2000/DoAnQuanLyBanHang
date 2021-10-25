@@ -6,10 +6,8 @@
 }
 
 <h2>Đơn hàng chưa duyệt</h2>
+<p style="color:red;"> Số lượng đơn hàng cần duyệt: @Session["DHCanDuyet"]</p>
 
-<p>
-    @Html.ActionLink("Thêm đơn hàng mới", "Create")
-</p>
 <div style="margin-top:20px;margin-left:13px;">
     <a href=@Url.Action("Index", "DonHangs") class="btn btn-light" style="border-color:black">
         <span class="text" h> Tất cả đơn hàng</span>
@@ -30,16 +28,13 @@
                 Mã đơn hàng
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayLapHD)
+                Ngày lập DH
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayGiaoHang)
+                Địa chỉ giao
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DiaChiGiaoHang)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KhachHang.TenKH)
+                Tên khách hàng
             </th>
             <th>
                 Trạng thái
@@ -57,15 +52,12 @@
                     @Html.DisplayFor(modelItem => item.NgayLapHD)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NgayGiaoHang)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.DiaChiGiaoHang)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
                 </td>
-                <td>
+                
                 <td>
                     @if (item.NgayGiaoHang != null)
                     {
@@ -76,12 +68,11 @@
                         <p style="color:red;">Chờ phê duyệt</p>
                     }
                 </td>
-                </td>
+                
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MaDH }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MaDH }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MaDH })
-                    <a class="btn" href="@Url.Action("Browser","DonHangs", new {id = item.MaDH})" onclick="logOut()" style="margin-left:20px;background-color:#007bff;color:#fff"><i class="fas fa-shopping-cart"></i> Duyệt đơn </a>
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MaDH }) |
+                    <a class="btn" href="@Url.Action("Browser", "DonHangs", new { id = item.MaDH })" onclick="logOut()" style="background-color:#007bff;color:#fff;" ;><i class="fas fa-check"></i> Duyệt đơn</a>
+                    <a class="btn" href="@Url.Action("Delete","DonHangs", new {id = item.MaDH})" onclick="logOut()" style="background-color:red;color:#fff;width:110px"><i class="fas fa-window-close"></i> Hủy đơn </a>
                 </td>
             </tr>
         }

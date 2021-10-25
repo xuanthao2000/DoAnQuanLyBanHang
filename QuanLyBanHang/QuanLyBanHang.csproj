@@ -291,6 +291,7 @@
     <Content Include="Content\img\banner.jpg" />
     <Content Include="Content\img\logo-white.png" />
     <Content Include="Content\img\logo-z.png" />
+    <Content Include="Areas\Admin\dist\sb-admin-2.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Template\forgotPw.html" />
     <Content Include="Content\Template\neworder.html" />
@@ -367,12 +368,10 @@
     <Content Include="Areas\Admin\Views\Nhanviens\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Nhanviens\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Nhanviens\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Nhanviens\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Nhanviens\Index.cshtml" />
     <Content Include="Areas\Admin\Views\KhachHangs\Create.cshtml" />
     <Content Include="Areas\Admin\Views\KhachHangs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\KhachHangs\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\KhachHangs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\KhachHangs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\DonHangs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\DonHangs\Details.cshtml" />
@@ -389,6 +388,8 @@
       <DependentUpon>QLBanHangEF.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Nhanviens\EditInfo.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachHangs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhanviens\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -464,6 +465,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Content\js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

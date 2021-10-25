@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using QuanLyBanHang.Models;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
@@ -15,29 +16,32 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         private qlbanhangEntities db = new qlbanhangEntities();
 
         // GET: Admin/DonHangs
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var donHangs = db.DonHangs.Include(d => d.KhachHang).Include(d => d.Nhanvien).ToList();
-            // Tổng đơn hàng
-            var dh = db.DonHangs.Select(s =>s).ToList();
-            int tongDH = 0;
-            for(int i=0;i<=dh.Count;i++)
-            {
-                tongDH++;
-            }
-            Session["TongDH"] = tongDH;
-            // Tổng  tiền
-            var thanhtien = db.DonHangs.Select(s => s).ToList();
-            int tongTien = 0;
-            for (int i = 0; i <= dh.Count; i++)
-            {
-                tongTien += i;
-            }
-            Session["TongTien"] = tongTien;
-
-
-            return View(donHangs);
+            DonHangCanDuyet();
+            var donHangs = db.DonHangs.Include(d => d.KhachHang).Include(d => d.Nhanvien);
+            var dHang = donHangs.OrderByDescending(s => s.MaDH).ToList();
+      
+            // Page
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            page = 1;
+            if (Session["MaNV"] == null)
+                return Redirect("~/Login/Index");
+            else
+                return View(dHang.ToPagedList(pageNumber, pageSize));
         }
+        public void DonHangCanDuyet()
+        {
+            
+            var a = db.DonHangs.Where(s => s.NgayGiaoHang == null).ToList();
+            int b = 0;
+            for (int i = 0; i < a.Count; i++)
+            {
+                b++;
+                Session["DHCanDuyet"] = b;
+            }
+        }    
 
         // GET: Admin/DonHangs/Details/5
         public ActionResult Details(int? id)
@@ -46,40 +50,15 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DonHang donHang = db.DonHangs.Find(id);
-            if (donHang == null)
+            var cTDH = db.CTDHs.Where(m => m.MaDH == id);
+            if (cTDH == null)
             {
                 return HttpNotFound();
             }
-            return View(donHang);
+            return View(cTDH.ToList());
         }
 
-        // GET: Admin/DonHangs/Create
-        public ActionResult Create()
-        {
-            ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "TenKH");
-            ViewBag.MaNV = new SelectList(db.Nhanviens, "MaNV", "HoNV");
-            return View();
-        }
-
-        // POST: Admin/DonHangs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaDH,MaKH,MaNV,NgayLapHD,NgayGiaoHang,DiaChiGiaoHang")] DonHang donHang)
-        {
-            if (ModelState.IsValid)
-            {
-                db.DonHangs.Add(donHang);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "TenKH", donHang.MaKH);
-            ViewBag.MaNV = new SelectList(db.Nhanviens, "MaNV", "HoNV", donHang.MaNV);
-            return View(donHang);
-        }
+       
 
         // GET: Admin/DonHangs/Delete/5
         public ActionResult Delete(int? id)
@@ -112,6 +91,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             db.DonHangs.Remove(donHang);
             
             db.SaveChanges();
+            SetAlert("Hủy đơn hàng thành công", "success");
             return RedirectToAction("Index");
 
             
@@ -128,6 +108,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
 
         public ActionResult UnapprovedOrder()
         {
+            DonHangCanDuyet();
             var donHangs = db.DonHangs.Where(s => s.NgayGiaoHang == null);
             //var sp = sanPhams.OrderByDescending(s => s.DonGia).ToList();
             return View(donHangs.ToList());
@@ -143,9 +124,29 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             DonHang donHang = db.DonHangs.Find(id);
             donHang.NgayGiaoHang = DateTime.Now;
             donHang.MaNV = (int)Session["MaNV"];
-            db.SaveChanges();
 
+            db.SaveChanges();
+            SetAlert("Duyệt đơn hàng thành công", "success");
             return RedirectToAction("Index");
         }
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert-success";
+            }
+            else if (type == "warning")
+            {
+                TempData["AlertType"] = "alert-warning";
+            }
+            else if (type == "error")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
+        }
     }
+
 }
+
