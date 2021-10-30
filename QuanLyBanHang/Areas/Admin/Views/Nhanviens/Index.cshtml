@@ -4,7 +4,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
+@if ((bool)Session["Admin"] == true)
+{
 <h2>Quản lý nhân viên</h2>
 
 <p>
@@ -16,7 +17,7 @@
             Tên nhân viên
         </th>
         <th>
-           Địa chỉ
+            Địa chỉ
         </th>
         <th>
             Điện thoại
@@ -35,31 +36,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoNV) @Html.DisplayFor(modelItem => item.Ten)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Diachi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dienthoai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        
-        <td>
-            @Html.ActionLink("Sửa", "Edit", new { id=item.MaNV }) |
-            @Html.ActionLink("Chi tiết", "Details", new { id=item.MaNV }) |
-            @Html.ActionLink("Xóa", "Delete", new { id=item.MaNV })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoNV) @Html.DisplayFor(modelItem => item.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diachi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dienthoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.MaNV }) |
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaNV }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.MaNV })
+            </td>
+        </tr>
+    }
 
 </table>
+}else
+{
+    <H2>Bạn không có quyền quản lý nhân viên</H2>
+}

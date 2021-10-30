@@ -153,6 +153,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(nhanvien).State = EntityState.Modified;
+                nhanvien.Admin = (bool)Session["Admin"];
                 db.SaveChanges();
                 SetAlert("Cập nhật thông tin thành công", "success");
                 return RedirectToAction("EditInfo");

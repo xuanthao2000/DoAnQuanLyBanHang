@@ -93,13 +93,12 @@ namespace QuanLyBanHang.Controllers
                 {
                     db.KhachHangs.Add(khachHang);
                     db.SaveChanges();
-                    ViewBag.Message = "Bạn đã tạo tài khoản thành công";
+                    SetAlert("Tạo tài khoản thành công", "success");
                     return RedirectToAction("SignUp");
                 }
                 else
                 {
-                    ModelState.AddModelError("mailkh","Email đã tồn tại, vui lòng kiểm tra lại !");
-                    ViewBag.Message = "Email đã tồn tại, vui lòng kiểm tra lại !";
+                    SetAlert("Tạo tài khoản thất bại, Email đã tồn tại", "error");
                 }
 
             }
@@ -233,6 +232,23 @@ namespace QuanLyBanHang.Controllers
             kh.Password = newPass;
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert-success";
+            }
+            else if (type == "warning")
+            {
+                TempData["AlertType"] = "alert-warning";
+            }
+            else if (type == "error")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
         }
     }
 }

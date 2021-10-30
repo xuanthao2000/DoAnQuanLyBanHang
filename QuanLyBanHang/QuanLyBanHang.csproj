@@ -292,6 +292,7 @@
     <Content Include="Content\img\logo-white.png" />
     <Content Include="Content\img\logo-z.png" />
     <Content Include="Areas\Admin\dist\sb-admin-2.js" />
+    <Content Include="Content\js\scripts.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Template\forgotPw.html" />
     <Content Include="Content\Template\neworder.html" />
@@ -465,7 +466,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Content\js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

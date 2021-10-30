@@ -140,13 +140,21 @@
     @*<div class="alert alert-success">
         Demo alert
     </div>*@
+<div style="margin-top:100px;">
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+            @TempData["AlertMessage"]
+        </div>
+    }
+</div>
     @RenderBody()
     <!-- ---- -->
     <!-- --body-- -->
     
     <!-- ---- -->
     <!-- --footer-- -->
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-top:10px;">
 
         <!-- --thongtin-- -->
         <div class="container info">
