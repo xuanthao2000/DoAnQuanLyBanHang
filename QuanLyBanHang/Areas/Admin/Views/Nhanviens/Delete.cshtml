@@ -4,76 +4,70 @@
     ViewBag.Title = "Delete";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-@if (Session["MaNV"] != null)
+@if ((bool)Session["Admin"] == true)
 {
-    if ((bool)Session["Admin"] == true)
-    {
-<h2>Xóa nhân viên</h2>
+    <h2>Xóa nhân viên</h2>
 
-<h3>Bạn có chắc chắn muốn xóa nhân viên này?</h3>
-<div>
-    <h4>Nhanvien</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Họ tên:
-        </dt>
+    <h3>Bạn có chắc chắn muốn xóa nhân viên này?</h3>
+    <div>
+        <h4>Nhanvien</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Họ tên:
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HoNV)  @Html.DisplayFor(model => model.Ten)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.HoNV)  @Html.DisplayFor(model => model.Ten)
+            </dd>
 
-        <dt>
-            Địa chỉ
-        </dt>
+            <dt>
+                Địa chỉ
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Diachi)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Diachi)
+            </dd>
 
-        <dt>
-            Số điện thoại
-        </dt>
+            <dt>
+                Số điện thoại
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Dienthoai)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Dienthoai)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dt>
-            Mật khẩu:
-        </dt>
+            <dt>
+                Mật khẩu:
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
 
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Xóa" class="btn btn-default" /> |
-            @Html.ActionLink("Trở về danh sách nhân viên", "Index")
-        </div>
-    }
-</div>
-    }
-    else
-    {
-        <h4>Bạn không có quyền quản lý nhân viên</h4>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-default" /> |
+                @Html.ActionLink("Trở về danh sách nhân viên", "Index")
+            </div>
+        }
+    </div>
 }
 else
 {
-    <h4>Bạn không thể quản lý nhân viên. Bạn phải đăng nhập <a class="nav-link" href="~/Login/Index"> Đăng nhập</a></h4>
+    <H2>Bạn không có quyền quản lý nhân viên</H2>
 }

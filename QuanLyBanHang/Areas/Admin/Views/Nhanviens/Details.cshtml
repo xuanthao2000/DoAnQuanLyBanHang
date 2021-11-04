@@ -4,70 +4,63 @@
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-@if (Session["MaNV"] != null)
+@if ((bool)Session["Admin"] == true)
 {
-    if ((bool)Session["Admin"] == true)
-    { 
-<h2>Chi tiết nhân viên</h2>
+    <h2>Chi tiết nhân viên</h2>
 
-<div>
-    <h4>Nhân viên</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Họ tên:
-        </dt>
+    <div>
+        <h4>Nhân viên</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Họ tên:
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HoNV) @Html.DisplayFor(model => model.Ten)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.HoNV) @Html.DisplayFor(model => model.Ten)
+            </dd>
 
-        <dt>
-            Địa chỉ
-        </dt>
+            <dt>
+                Địa chỉ
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Diachi)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Diachi)
+            </dd>
 
-        <dt>
-            Số điện thoại
-        </dt>
+            <dt>
+                Số điện thoại
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Dienthoai)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Dienthoai)
+            </dd>
 
-        <dt>
-            Email
-        </dt>
+            <dt>
+                Email
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dt>
-            Mật khẩu
-        </dt>
+            <dt>
+                Mật khẩu
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
 
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaNV }) |
-    @Html.ActionLink("Trở về danh sách nhân viên", "Index")
-</p>
-    }
-    else
-    {
-        <h4>Bạn không có quyền quản lý nhân viên</h4>
-    }
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaNV }) |
+        @Html.ActionLink("Trở về danh sách nhân viên", "Index")
+    </p>
 }
 else
 {
-    <h4>Bạn không thể quản lý nhân viên. Bạn phải đăng nhập <a class="nav-link" href="~/Login/Index"> Đăng nhập</a></h4>
+    <H2>Bạn không có quyền quản lý nhân viên</H2>
 }

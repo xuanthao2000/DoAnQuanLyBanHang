@@ -6,103 +6,100 @@
 }
 
 
-
-@using (Html.BeginForm())
+@if ((bool)Session["Admin"] == true)
 {
-    if (Session["MaNV"] != null)
+
+    using (Html.BeginForm())
     {
-        if((bool)Session["Admin"] == true)
-        {
-    @Html.AntiForgeryToken()
-   
 
-    <div class="form-horizontal">
-        <h2>Thêm nhân viên</h2>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div class="col-md-10">
-                Họ và chữ lót
-                @Html.EditorFor(model => model.HoNV, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HoNV, "", new { @class = "text-danger" })
+        @Html.AntiForgeryToken()
+
+
+        <div class="form-horizontal">
+            <h2>Thêm nhân viên</h2>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-10">
+                    Họ và chữ lót
+                    @Html.EditorFor(model => model.HoNV, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HoNV, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            
-            <div class="col-md-10">
-                Tên nhân viên
-                @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    Tên nhân viên
+                    @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            
-            <div class="col-md-10">
-                Địa chỉ
-                @Html.EditorFor(model => model.Diachi, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Diachi, "", new { @class = "text-danger" })
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    Địa chỉ
+                    @Html.EditorFor(model => model.Diachi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Diachi, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            
-            <div class="col-md-10">
-                Số điện thoại
-                @Html.EditorFor(model => model.Dienthoai, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Dienthoai, "", new { @class = "text-danger" })
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    Số điện thoại
+                    @Html.EditorFor(model => model.Dienthoai, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Dienthoai, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            
-            <div class="col-md-10">
-                Email
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    Email
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-           
-            <div class="col-md-10">
-                Mật khẩu
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    Mật khẩu
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            
-            <div class="col-md-10">
-                <div class="checkbox">
-                    Quyền Admin
-                    @Html.EditorFor(model => model.Admin)
-                    @Html.ValidationMessageFor(model => model.Admin, "", new { @class = "text-danger" })
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        Quyền Admin
+                        @Html.EditorFor(model => model.Admin)
+                        @Html.ValidationMessageFor(model => model.Admin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Tạo nhân viên" class="btn btn-default" />
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Tạo nhân viên" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-        }
-        else
-        {
-            <h4>Bạn không có quyền quản lý nhân viên</h4>
-        }
-    }
-    else
-    {
-        <h4>Bạn không thể quản lý nhân viên. Bạn phải đăng nhập <a class="nav-link" href="~/Login/Index"> Đăng nhập</a></h4>
-    }
+
+    
+
 }
 
 
 <div>
     @Html.ActionLink("Trở về danh sách nhân viên", "Index")
 </div>
+}else
+    {
+<H2>Bạn không có quyền quản lý nhân viên</H2>
+    }
