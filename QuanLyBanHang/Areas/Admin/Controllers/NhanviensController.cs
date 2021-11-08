@@ -129,8 +129,10 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+        
         public ActionResult EditInfo(int? id)
         {
+            id = Convert.ToInt32(Session["MaNV"]);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

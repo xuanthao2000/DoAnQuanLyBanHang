@@ -161,7 +161,7 @@
                         <p></p>
                     }
                     <div>
-                        <a class="nav-link" href="@Url.Action("EditInfo","NhanViens",new { id = @Convert.ToInt32(Session["MaNV"]) })">
+                        <a class="nav-link" href="@Url.Action("EditInfo","NhanViens",FormMethod.Post)">
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i> Thông tin cá nhân</div>
 
                         </a>

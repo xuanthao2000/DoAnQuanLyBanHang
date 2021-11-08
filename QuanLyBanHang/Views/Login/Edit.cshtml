@@ -57,7 +57,7 @@
                 <div class="col-9">
                     <div>THÔNG TIN TÀI KHOẢN</div>
                     <div class="mt-5">
-                        @using (Html.BeginForm())
+                        @using (Html.BeginForm(FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
 
